@@ -1,0 +1,23 @@
+# Binary
+cpt
+*.exe
+
+# Pi subagent artifacts
+.pi-subagents/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Go
+*.test
+*.out
+
+# Temp
+/tmp/
