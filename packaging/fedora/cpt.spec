@@ -41,7 +41,7 @@ install -Dm644 README_zh.md %{buildroot}%{_defaultdocdir}/%{name}/README_zh.md
 %{_bindir}/cpt
 
 %changelog
-* Sat Jul 26 2026 xgw <xieguaiwu@163.com> - 1.0.0-1
+* Sun Jul 26 2026 xgw <xieguaiwu@163.com> - 1.0.0-1
 - Initial Go package
 
 %global debug_package %{nil}
