@@ -1,5 +1,5 @@
 Name:           cpt
-Version:        1.0.0
+Version:        1.0.1
 Release:        1%{?dist}
 Summary:        Terminal companion for competitive-companion browser extension
 
@@ -41,6 +41,9 @@ install -Dm644 README_zh.md %{buildroot}%{_defaultdocdir}/%{name}/README_zh.md
 %{_bindir}/cpt
 
 %changelog
+* Sun Jul 26 2026 xgw <xieguaiwu@163.com> - 1.0.1-1
+- Security fixes: localhost-only bind, shared secret auth, rate limiting, body size limit, test count cap, error sanitization, CSRF protection
+
 * Sun Jul 26 2026 xgw <xieguaiwu@163.com> - 1.0.0-1
 - Initial Go package
 

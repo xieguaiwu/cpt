@@ -6,7 +6,17 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
+	"strings"
+	"sync"
 	"time"
+	"unicode"
+)
+
+const (
+	maxRequestBody = 10 << 20 // 10 MB
+	maxTests       = 100
+	maxRatePerMin  = 30
 )
 
 // Server handles HTTP requests from competitive-companion.
@@ -14,27 +24,34 @@ type Server struct {
 	httpServer *http.Server
 	samplesDir string
 	autoRunBin string
+	secret     string
+	mu         sync.Mutex
+	lastReq    time.Time
+	reqCount   int
 }
 
 // NewServer creates a new server with the given configuration.
-func NewServer(samplesDir, autoRunBin string) *Server {
+func NewServer(samplesDir, autoRunBin, secret string) *Server {
 	return &Server{
 		samplesDir: samplesDir,
 		autoRunBin: autoRunBin,
+		secret:     secret,
 	}
 }
 
-// Start begins listening on the given address.
-func (s *Server) Start(addr string) error {
+// Start begins listening on the given host:port.
+func (s *Server) Start(host string, port int) error {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", s.handleRequest)
 	mux.HandleFunc("/health", s.handleHealth)
+	mux.HandleFunc("/", s.handleRequest)
 
 	s.httpServer = &http.Server{
-		Addr:         addr,
-		Handler:      mux,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 10 * time.Second,
+		Addr:           fmt.Sprintf("%s:%d", host, port),
+		Handler:        mux,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		IdleTimeout:    10 * time.Second,
+		MaxHeaderBytes: 1 << 20, // 1 MB
 	}
 
 	return s.httpServer.ListenAndServe()
@@ -50,52 +67,95 @@ func (s *Server) Stop() {
 }
 
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("OK"))
 }
 
 func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
+	// Only respond to exact "/" path
+	if r.URL.Path != "/" {
+		http.Error(w, "Not found", http.StatusNotFound)
+		return
+	}
+
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
+	// Content-Type check (CSRF protection)
+	ct := r.Header.Get("Content-Type")
+	if ct != "" && !strings.HasPrefix(ct, "application/json") {
+		http.Error(w, "Content-Type must be application/json", http.StatusUnsupportedMediaType)
+		return
+	}
+
+	// Shared secret authentication
+	if s.secret != "" {
+		if r.Header.Get("X-CPT-Secret") != s.secret {
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			return
+		}
+	}
+
+	// Rate limiting (per-minute window)
+	if !s.checkRateLimit() {
+		http.Error(w, "Too many requests", http.StatusTooManyRequests)
+		return
+	}
+
+	// Limit request body size
+	r.Body = http.MaxBytesReader(w, r.Body, maxRequestBody)
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
-		http.Error(w, "Failed to read body", http.StatusBadRequest)
+		http.Error(w, "Request body too large or unreadable", http.StatusRequestEntityTooLarge)
 		return
 	}
 	defer r.Body.Close()
 
 	var task Task
 	if err := json.Unmarshal(body, &task); err != nil {
-		http.Error(w, fmt.Sprintf("Invalid JSON: %v", err), http.StatusBadRequest)
+		http.Error(w, "Invalid JSON", http.StatusBadRequest)
 		return
 	}
 
-	// Print received summary
-	group := task.Group
-	if group == "" {
-		group = task.URL
+	// Sanitize task metadata for terminal printing
+	taskName := sanitize(task.Name)
+	taskGroup := task.Group
+	if taskGroup == "" {
+		taskGroup = task.URL
 	}
-	fmt.Printf("📥 Received: %s — %s\n", task.Name, group)
+	taskGroup = sanitize(taskGroup)
 
-	// Save samples
+	fmt.Printf("📥 Received: %s — %s\n", taskName, taskGroup)
+
+	// Serialize save + auto-run to prevent races
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	// Save samples with capped test count
 	count, err := SaveSamples(task, s.samplesDir)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Failed to save samples: %v", err), http.StatusInternalServerError)
+		fmt.Fprintf(os.Stderr, "save samples error: %v\n", err)
+		http.Error(w, "Failed to save samples", http.StatusInternalServerError)
 		return
 	}
 
 	fmt.Printf("   Saved %d samples to %s/\n", count, s.samplesDir)
 
-	// Auto-run if configured
+	// Auto-run asynchronously if configured
 	if s.autoRunBin != "" {
 		fmt.Println()
-		if err := RunAll(s.autoRunBin, s.samplesDir, 2, 0); err != nil {
-			fmt.Printf("   Auto-run error: %v\n", err)
-		}
+		go func() {
+			if err := RunAll(s.autoRunBin, s.samplesDir, 2, 0); err != nil {
+				fmt.Printf("   Auto-run error: %v\n", err)
+			}
+		}()
 	}
 
 	// Send response
@@ -107,4 +167,24 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// checkRateLimit implements a simple per-minute rate limiter.
+func (s *Server) checkRateLimit() bool {
+	now := time.Now()
+	if now.Sub(s.lastReq) > time.Minute {
+		s.reqCount = 0
+		s.lastReq = now
+	}
+	s.reqCount++
+	return s.reqCount <= maxRatePerMin
+}
 
+// sanitize strips non-printable characters and ANSI escape sequences.
+func sanitize(s string) string {
+	var b strings.Builder
+	for _, r := range s {
+		if unicode.IsPrint(r) && r != '\x1b' {
+			b.WriteRune(r)
+		}
+	}
+	return b.String()
+}
