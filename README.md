@@ -18,6 +18,7 @@ Supports **100+ online judges** (Luogu, USACO, Codeforces, AtCoder, and more) th
 - **Colored verdicts** — ✅ AC / ❌ WA / ⏱ TLE / 💥 RE, with line-by-line diff for wrong answers
 - **Zero runtime deps** — single ~6 MB static binary, no Python/Node/Java required
 - **Instant compilation** — Go incremental builds in <1 second
+- **Reusable binary** — compiled output stays in the source dir (`main.cpp` → `./main`), ready to re-run against custom samples or via `cpt run ./main`
 
 ---
 
@@ -92,12 +93,16 @@ cpt serve -r ./a.out             # auto-run binary after receiving a problem
 Auto-detect language, compile (if needed), and run against all samples.
 
 ```bash
-cpt test main.cpp                # C++ → g++ -std=c++17 -O2
+cpt test main.cpp                # C++ → g++ -std=c++17 -O2 -Wall -Wextra -Wshadow
 cpt test solution.py             # Python → python3 (interpreted)
 cpt test Main.java               # Java → javac → java
 cpt test main.rs                 # Rust → rustc -O
 cpt test main.go                 # Go → go build
 cpt test main.cpp -t 5 -s 1      # timeout 5s, only sample 1
+
+> Compiler flags mirror `~/.config/nvim/lua/utils.lua` (CompileRun). The compiled
+> binary is kept in the source directory (`main.cpp` → `./main`) after testing, so
+> you can re-run it against custom samples: `./main < in.txt` or `cpt run ./main`.
 ```
 
 ### `cpt run <binary>`
@@ -118,8 +123,8 @@ cpt run ./a.out -s 2             # only sample 2
 
 | Extension | Language  | Compile Command          |
 |-----------|-----------|--------------------------|
-| `.cpp` `.cc` `.cxx` | C++ | `g++ -std=c++17 -O2` |
-| `.c`      | C         | `gcc -std=c11 -O2`       |
+| `.cpp` `.cc` `.cxx` | C++ | `g++ -std=c++17 -O2 -Wall -Wextra -Wshadow` |
+| `.c`      | C         | `gcc -std=c11 -O2 -Wall` |
 | `.py` `.py3` | Python | `python3` (interpreted) |
 | `.java`   | Java      | `javac` → `java`         |
 | `.rs`     | Rust      | `rustc -O`               |

@@ -1,5 +1,5 @@
 Name:           cpt
-Version:        1.0.1
+Version:        1.1.1
 Release:        1%{?dist}
 Summary:        Terminal companion for competitive-companion browser extension
 
@@ -41,6 +41,10 @@ install -Dm644 README_zh.md %{buildroot}%{_defaultdocdir}/%{name}/README_zh.md
 %{_bindir}/cpt
 
 %changelog
+* Sun Aug 02 2026 xgw <xieguaiwu@163.com> - 1.1.1-1
+- Align compiler flags with nvim utils.lua: C++ g++ -std=c++17 -O2 -Wall -Wextra -Wshadow, C gcc -std=c11 -O2 -Wall
+- Keep compiled binary in source dir (main.cpp -> ./main) for reuse with custom samples; fix exec PATH fallback for relative paths
+
 * Sun Jul 26 2026 xgw <xieguaiwu@163.com> - 1.0.1-1
 - Security fixes: localhost-only bind, shared secret auth, rate limiting, body size limit, test count cap, error sanitization, CSRF protection
 

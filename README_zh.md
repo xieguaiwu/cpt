@@ -18,6 +18,7 @@
 - **彩色判定结果** — ✅ AC / ❌ WA / ⏱ TLE / 💥 RE，WA 时逐行展示期望 vs 实际输出
 - **零运行时依赖** — 单二进制文件 ~6 MB，不需要 Python / Node / Java
 - **秒级编译** — Go 增量编译 <1 秒
+- **保留编译产物** — 编译后的二进制保存在源码目录（`main.cpp` → `./main`），可直接复用或配合 `cpt run` 自定义样例
 
 ---
 
@@ -92,12 +93,16 @@ cpt serve -r ./a.out             # 收到题目后自动运行指定二进制
 自动识别语言、编译（如需要）、对拍所有样例。
 
 ```bash
-cpt test main.cpp                # C++ → g++ -std=c++17 -O2
+cpt test main.cpp                # C++ → g++ -std=c++17 -O2 -Wall -Wextra -Wshadow
 cpt test solution.py             # Python → python3（解释执行）
 cpt test Main.java               # Java → javac → java
 cpt test main.rs                 # Rust → rustc -O
 cpt test main.go                 # Go → go build
 cpt test main.cpp -t 5 -s 1      # 超时 5 秒，仅测第 1 个样例
+
+> 编译参数与 `~/.config/nvim/lua/utils.lua`（CompileRun）保持一致。测试结束后
+> 编译产物保留在源码目录（`main.cpp` → `./main`），可自定义样例直接复用：
+> `./main < in.txt` 或 `cpt run ./main`。
 ```
 
 ### `cpt run <二进制>`
@@ -116,8 +121,8 @@ cpt run ./a.out -s 2             # 仅测第 2 个样例
 
 | 扩展名 | 语言 | 编译命令 |
 |-----------|------|------------------|
-| `.cpp` `.cc` `.cxx` | C++ | `g++ -std=c++17 -O2` |
-| `.c` | C | `gcc -std=c11 -O2` |
+| `.cpp` `.cc` `.cxx` | C++ | `g++ -std=c++17 -O2 -Wall -Wextra -Wshadow` |
+| `.c` | C | `gcc -std=c11 -O2 -Wall` |
 | `.py` `.py3` | Python | `python3`（解释执行）|
 | `.java` | Java | `javac` → `java` |
 | `.rs` | Rust | `rustc -O` |
