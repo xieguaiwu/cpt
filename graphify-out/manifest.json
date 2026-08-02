@@ -15,9 +15,9 @@
     "semantic_hash": "9bdb3955139d1fa906210fe0d1bd0f45"
   },
   "cmd/test.go": {
-    "mtime": 1785036204.0716379,
-    "ast_hash": "58ed717a2d4d0e8790d40c681172cba4",
-    "semantic_hash": "58ed717a2d4d0e8790d40c681172cba4"
+    "mtime": 1785651022.0842552,
+    "ast_hash": "fc06baa782e99c9684f014d2e0d1b104",
+    "semantic_hash": ""
   },
   "go.mod": {
     "mtime": 1785036274.0592422,
@@ -25,9 +25,9 @@
     "semantic_hash": "27909987d223294239d31316d22df6e1"
   },
   "internal/compiler.go": {
-    "mtime": 1785036499.2901688,
-    "ast_hash": "a779c89241b7ae431140e3b8aa46804e",
-    "semantic_hash": "a779c89241b7ae431140e3b8aa46804e"
+    "mtime": 1785651125.711157,
+    "ast_hash": "3b3f49ab8be7f953d65afcdc3878dcb8",
+    "semantic_hash": ""
   },
   "internal/parser.go": {
     "mtime": 1785048873.5484352,
@@ -1965,19 +1965,19 @@
     "semantic_hash": "fec4aa34d2ddd279754d153b167742f3"
   },
   "DEVELOPMENT.md": {
-    "mtime": 1785049227.0477672,
-    "ast_hash": "c901463ea82ea8a7252d89f0fca94dbd",
-    "semantic_hash": "c901463ea82ea8a7252d89f0fca94dbd"
+    "mtime": 1785651025.4572847,
+    "ast_hash": "5c211a2771c7b2a75844e80926f3888b",
+    "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1785036739.2662213,
-    "ast_hash": "1d2251ebf15b99e7fab4b765ed197ec7",
-    "semantic_hash": "1d2251ebf15b99e7fab4b765ed197ec7"
+    "mtime": 1785651294.125623,
+    "ast_hash": "ee0a483598db9bf3a86e12f2787d6106",
+    "semantic_hash": ""
   },
   "README_zh.md": {
-    "mtime": 1785036755.4223595,
-    "ast_hash": "7c0b2d12104cfd3903572da8fab1d8ff",
-    "semantic_hash": "7c0b2d12104cfd3903572da8fab1d8ff"
+    "mtime": 1785651310.6077664,
+    "ast_hash": "beb3b5d72db3b3c335a3520ac1317e14",
+    "semantic_hash": ""
   },
   "vendor/github.com/fatih/color/README.md": {
     "mtime": 1785048366.369104,
@@ -2018,5 +2018,45 @@
     "mtime": 1785048366.540104,
     "ast_hash": "b86e8bb5257e4e5969bed500576141f1",
     "semantic_hash": "b86e8bb5257e4e5969bed500576141f1"
+  },
+  "vendor/github.com/fatih/color/LICENSE.md": {
+    "mtime": 1785048366.369104,
+    "ast_hash": "316e6d590bdcde7993fb175662c0dd5a",
+    "semantic_hash": ""
+  },
+  "vendor/github.com/spf13/cobra/.golangci.yml": {
+    "mtime": 1785048366.476104,
+    "ast_hash": "76a0cd495edef0c129048cf88744e8bc",
+    "semantic_hash": ""
+  },
+  "vendor/github.com/spf13/cobra/CONDUCT.md": {
+    "mtime": 1785048366.477104,
+    "ast_hash": "9e063409d3eb9e1ff98b048c4b6eb3a2",
+    "semantic_hash": ""
+  },
+  "vendor/github.com/spf13/cobra/CONTRIBUTING.md": {
+    "mtime": 1785048366.477104,
+    "ast_hash": "dfa69cadce927cb486cf080aaa511d0e",
+    "semantic_hash": ""
+  },
+  "vendor/github.com/spf13/cobra/LICENSE.txt": {
+    "mtime": 1785048366.477104,
+    "ast_hash": "920d76114a32b0fb75b3f2718c5a91be",
+    "semantic_hash": ""
+  },
+  "vendor/github.com/spf13/cobra/SECURITY.md": {
+    "mtime": 1785048366.477104,
+    "ast_hash": "0ccc24d804f3c4496a01410f36a3191a",
+    "semantic_hash": ""
+  },
+  "vendor/github.com/spf13/pflag/.golangci.yaml": {
+    "mtime": 1785048366.480104,
+    "ast_hash": "173fa0c93dcc91612a89d75def0b2451",
+    "semantic_hash": ""
+  },
+  "vendor/github.com/spf13/pflag/.travis.yml": {
+    "mtime": 1785048366.480104,
+    "ast_hash": "f504718ab320acb1939add99896255f7",
+    "semantic_hash": ""
   }
 }
