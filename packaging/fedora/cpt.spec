@@ -41,6 +41,10 @@ install -Dm644 README_zh.md %{buildroot}%{_defaultdocdir}/%{name}/README_zh.md
 %{_bindir}/cpt
 
 %changelog
+* Sun Aug 02 2026 xgw <xieguaiwu@163.com> - 1.2.0-1
+- Wait mode: cpt test starts a temporary server and blocks until competitive-companion delivers a problem when no samples exist, merging serve + test into one command
+- New flags on cpt test: --wait (force fresh problem, clears stale samples), --wait-timeout, -p/--host/--secret for the temporary server
+
 * Sun Aug 02 2026 xgw <xieguaiwu@163.com> - 1.1.1-1
 - Align compiler flags with nvim utils.lua: C++ g++ -std=c++17 -O2 -Wall -Wextra -Wshadow, C gcc -std=c11 -O2 -Wall
 - Keep compiled binary in source dir (main.cpp -> ./main) for reuse with custom samples; fix exec PATH fallback for relative paths
