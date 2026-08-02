@@ -14,6 +14,7 @@
 ## 特性
 
 - **一键同步样例** — competitive-companion 解析题目页面，cpt 通过 HTTP 接收并保存样例
+- **serve + test 一条命令** — `cpt test` 在无样例时自动启动临时服务器等待题目推送，收好后直接测试
 - **自动编译 + 测试** — 自动识别 C++ / C / Python / Java / Rust / Go，编译并对拍所有样例
 - **彩色判定结果** — ✅ AC / ❌ WA / ⏱ TLE / 💥 RE，WA 时逐行展示期望 vs 实际输出
 - **零运行时依赖** — 单二进制文件 ~6 MB，不需要 Python / Node / Java
@@ -33,6 +34,9 @@
 └──────────────────────┘                │  ↓ 运行对拍    │
                                          └───────────────┘
 ```
+
+`cpt test` 内嵌了这条流水线：当 `samples/` 还没有样例时，它会自己启动服务器、
+等待题目推送，然后自动编译并测试——无需再单独运行 `cpt serve`。
 
 ---
 
@@ -61,17 +65,24 @@ sudo mv cpt /usr/local/bin/
 
 ### 3. 开始刷题
 
-**终端 1** — 启动服务：
-```bash
-cpt serve
-```
+**一个终端，无需单独开服务**：
 
-**浏览器** — 打开任意题目页面（洛谷、USACO、Codeforces、AtCoder...），点击 competitive-companion 扩展图标。cpt 自动保存样例。
-
-**终端 2** — 写代码，然后：
 ```bash
 cpt test main.cpp
 ```
+
+如果还没有样例，cpt 会打印等待提示，自动启动临时服务器并阻塞等待：
+
+```
+🔍 Detected language: cpp
+⏳ No samples in samples/ — waiting for competitive-companion…
+   Open a problem page and click the extension button (server on http://127.0.0.1:27121)
+   Waiting indefinitely — Ctrl+C to abort
+```
+
+**浏览器** — 打开任意题目页面（洛谷、USACO、Codeforces、AtCoder...），点击 competitive-companion 扩展图标。cpt 立即保存样例并运行你的代码。
+
+如果偏好常驻服务器（例如一个会话内收多道题，或用 `-r` 自动运行），`cpt serve` 仍然可用。
 
 ---
 
@@ -99,6 +110,11 @@ cpt test Main.java               # Java → javac → java
 cpt test main.rs                 # Rust → rustc -O
 cpt test main.go                 # Go → go build
 cpt test main.cpp -t 5 -s 1      # 超时 5 秒，仅测第 1 个样例
+
+# 等待模式（无样例时自动启用）
+cpt test main.cpp --wait               # 强制等待新题目，丢弃旧样例
+cpt test main.cpp --wait-timeout 60    # 60 秒后放弃（0 = 无限等待）
+cpt test main.cpp -p 12345 --secret abc  # 自定义端口 / 共享密钥
 
 > 编译参数与 `~/.config/nvim/lua/utils.lua`（CompileRun）保持一致。测试结束后
 > 编译产物保留在源码目录（`main.cpp` → `./main`），可自定义样例直接复用：

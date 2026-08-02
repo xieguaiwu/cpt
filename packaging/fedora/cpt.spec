@@ -1,5 +1,5 @@
 Name:           cpt
-Version:        1.1.1
+Version:        1.2.0
 Release:        1%{?dist}
 Summary:        Terminal companion for competitive-companion browser extension
 

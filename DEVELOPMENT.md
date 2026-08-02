@@ -1,7 +1,7 @@
 # cpt — Developer Documentation
 
 > **Target audience**: AI agents and future maintainers.  
-> **Last updated**: 2026-07-26 (v1.0.1)
+> **Last updated**: 2026-08-02 (v1.2.0)
 
 ---
 
@@ -24,9 +24,9 @@ cmd/
 ├── root.go                 # cobra root command
 ├── serve.go                # `cpt serve` — HTTP server
 ├── run.go                  # `cpt run <binary>` — test runner
-└── test.go                 # `cpt test <source>` — compile + test
+└── test.go                 # `cpt test <source>` — compile + test, wait mode merges serve
 internal/
-├── server.go               # HTTP server (:27121), auth, rate limiting
+├── server.go               # HTTP server (:27121), auth, rate limiting, onProblem hook
 ├── parser.go               # JSON deserialization → sample file I/O
 ├── compiler.go             # Language detection + compilation dispatch
 └── runner.go               # Binary execution, stdout capture, diff engine
@@ -44,11 +44,29 @@ server.go (handleRequest)
 parser.go (SaveSamples)
   │ cap at 100 tests → write {N}.in / {N}.out to samples/
   ▼
+server.go (onProblem callback)
+  │ wake waiting `cpt test` process (count of saved samples)
+  ▼
 runner.go (RunAll → RunTest)
   │ pipe {N}.in to stdin → capture stdout → diff with {N}.out
   ▼
 Terminal: colored verdict (✅ AC / ❌ WA / ⏱ TLE / 💥 RE)
 ```
+
+### Wait Mode (`cpt test`)
+
+`cpt test <source>` checks for `*.in` files in the samples dir before compiling:
+
+- **Samples exist** → compile + test immediately (original behavior).
+- **No samples** (or `--wait`) → clear stale samples, start a temporary `internal.Server`
+  on :27121 (configurable via `-p/--host/--secret`), print a waiting banner, and block
+  on a buffered channel fed by `Server.SetOnProblem`. The first problem received stops
+  the server and triggers compile + test. `--wait-timeout N` gives up after N seconds;
+  Ctrl+C (SIGINT/SIGTERM) aborts with a clean exit via `errWaitAborted`.
+
+Server integration is a 3-line hook: `SetOnProblem(func(count int))` is invoked
+inside `handleRequest` right after `SaveSamples` (still under the save mutex), and
+`cpt serve` is untouched (callback unset → no-op).
 
 ### Key Design Decisions
 
@@ -104,8 +122,8 @@ This project was developed following `~/prompt_boilerplates/Coding/development-q
 
 | Gate | Status | Evidence |
 |------|:------:|----------|
-| 1. Cross-module contracts | ✅ | All exported functions grep-verified for consistent callers |
-| 2. Precondition reachability | ✅ | `DetectLang` return values fully covered; all branches reachable |
+| 1. Cross-module contracts | ✅ | All exported functions grep-verified for consistent callers; `SetOnProblem` used by `cmd/test.go` only |
+| 2. Precondition reachability | ✅ | `DetectLang` return values fully covered; all branches reachable; wait mode covered by 7 manual scenarios |
 | 3. Boundaries & overflow | ✅ | Binary output in source dir (fixed name, no PID); re-run overwrites; file-not-found gives clear error |
 | 4. State consistency | ✅ | Stateless CLI; server mutex protects shared state |
 | 5. Documentation sync | ✅ | DEVELOPMENT.md + bilingual README in same commit |
@@ -148,13 +166,25 @@ cpt serve --port 27140 &
 curl -X POST localhost:27140/ -H 'Content-Type: application/json' -d '{...}'
 
 # 2. cpt test
-echo 'int main(){...}' > solve.cpp
 cpt test solve.cpp
 
 # 3. cpt run
 cpt run ./a.out -s 1
 
-# 4. Full security test suite (see commit 8816f3f for details)
+# 4. Wait mode — merged serve + test (v1.2.0)
+cd /tmp/test
+cpt test solve.cpp -p 27123          # no samples → prints waiting banner, blocks
+curl -X POST localhost:27123/ -H 'Content-Type: application/json' -d '{...}'
+# → saves samples, compiles, tests automatically
+
+# 5. Wait mode edge cases
+cpt test solve.cpp --wait-timeout 2  # no samples → clean timeout error, exit 1
+cpt test solve.cpp --wait            # with stale samples → cleared, waits for fresh
+cpt test solve.cpp --wait -p 27125 & # SIGTERM → "Waiting aborted", clean exit
+cpt test solve.cpp -p 27126 --secret abc
+curl -X POST localhost:27126/ -H 'Content-Type: application/json' -H 'X-CPT-Secret: abc' ...
+
+# 6. Full security test suite (see commit 8816f3f for details)
 ```
 
 ### Lint
@@ -215,8 +245,8 @@ copr-cli build xieguaiwu/cpt ~/rpmbuild/SRPMS/cpt-X.Y.Z-1.fc42.src.rpm
 | `cmd/root.go` | Cobra root command | 25 |
 | `cmd/serve.go` | `cpt serve` command | 75 |
 | `cmd/run.go` | `cpt run` command | 33 |
-| `cmd/test.go` | `cpt test` command | 67 |
-| `internal/server.go` | HTTP server + security | 175 |
+| `cmd/test.go` | `cpt test` command + wait mode | 189 |
+| `internal/server.go` | HTTP server + security + onProblem hook | 203 |
 | `internal/parser.go` | JSON parsing + file I/O | 70 |
 | `internal/compiler.go` | Language detection + compilation | 105 |
 | `internal/runner.go` | Test execution + diff engine | 276 |
@@ -249,6 +279,11 @@ copr-cli build xieguaiwu/cpt ~/rpmbuild/SRPMS/cpt-X.Y.Z-1.fc42.src.rpm
 ---
 
 ## Changelog
+
+### v1.2.0 (2026-08-02)
+- **Wait mode**: `cpt test` starts a temporary server and blocks until competitive-companion delivers a problem when no samples exist — merging `cpt serve` + `cpt test` into one command
+- New `--wait` (force fresh problem, clears stale samples), `--wait-timeout` (0 = forever), `-p/--host/--secret` flags on `cpt test`
+- `internal.Server` gains a `SetOnProblem` callback hook (no-op when unset; `cpt serve` behavior unchanged)
 
 ### v1.0.1 (2026-07-26)
 - Security: 127.0.0.1 bind, secret auth, rate limiting, body size cap, test count cap, error sanitization, CSRF protection, file permission hardening

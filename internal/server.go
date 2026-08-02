@@ -25,6 +25,7 @@ type Server struct {
 	samplesDir string
 	autoRunBin string
 	secret     string
+	onProblem  func(count int)
 	mu         sync.Mutex
 	lastReq    time.Time
 	reqCount   int
@@ -37,6 +38,13 @@ func NewServer(samplesDir, autoRunBin, secret string) *Server {
 		autoRunBin: autoRunBin,
 		secret:     secret,
 	}
+}
+
+// SetOnProblem registers a callback invoked after a problem's samples are
+// saved successfully. The callback must not block (use a buffered channel).
+// Used by `cpt test` wait mode to wake up once a problem arrives.
+func (s *Server) SetOnProblem(cb func(count int)) {
+	s.onProblem = cb
 }
 
 // Start begins listening on the given host:port.
@@ -147,6 +155,11 @@ func (s *Server) handleRequest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Printf("   Saved %d samples to %s/\n", count, s.samplesDir)
+
+	// Notify a waiting client (e.g. `cpt test` wait mode)
+	if s.onProblem != nil {
+		s.onProblem(count)
+	}
 
 	// Auto-run asynchronously if configured
 	if s.autoRunBin != "" {

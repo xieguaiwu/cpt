@@ -14,6 +14,7 @@ Supports **100+ online judges** (Luogu, USACO, Codeforces, AtCoder, and more) th
 ## Features
 
 - **One-click sample sync** — competitive-companion parses the problem page; cpt receives the data via HTTP and saves samples locally
+- **Serve + test in one command** — `cpt test` starts a temporary server and waits for the problem automatically when no samples exist yet
 - **Auto-compile & test** — detects C++, C, Python, Java, Rust, Go; compiles and runs against all samples
 - **Colored verdicts** — ✅ AC / ❌ WA / ⏱ TLE / 💥 RE, with line-by-line diff for wrong answers
 - **Zero runtime deps** — single ~6 MB static binary, no Python/Node/Java required
@@ -33,6 +34,10 @@ Browser                                  Terminal
 └──────────────────────┘                │  ↓ run & diff │
                                          └───────────────┘
 ```
+
+`cpt test` embeds this pipeline: if no samples exist yet, it starts the server
+itself, waits for the problem, then compiles and tests automatically — no need
+to run `cpt serve` separately.
 
 ---
 
@@ -61,17 +66,25 @@ sudo mv cpt /usr/local/bin/
 
 ### 3. Start coding
 
-**Terminal 1** — start the server:
-```bash
-cpt serve
-```
+**One terminal — no separate server step**:
 
-**Browser** — open any problem page (Luogu, USACO, Codeforces, AtCoder...), click the competitive-companion extension icon. cpt automatically saves samples.
-
-**Terminal 2** — write your solution, then:
 ```bash
 cpt test main.cpp
 ```
+
+If samples are missing, cpt prints a waiting banner, starts a temporary server,
+and blocks until you deliver the problem:
+
+```
+🔍 Detected language: cpp
+⏳ No samples in samples/ — waiting for competitive-companion…
+   Open a problem page and click the extension button (server on http://127.0.0.1:27121)
+   Waiting indefinitely — Ctrl+C to abort
+```
+
+**Browser** — open any problem page (Luogu, USACO, Codeforces, AtCoder...), click the competitive-companion extension icon. cpt saves the samples and runs your solution immediately.
+
+Prefer a long-running server? `cpt serve` still works (e.g. for receiving several problems in one session or auto-running with `-r`).
 
 ---
 
@@ -99,6 +112,11 @@ cpt test Main.java               # Java → javac → java
 cpt test main.rs                 # Rust → rustc -O
 cpt test main.go                 # Go → go build
 cpt test main.cpp -t 5 -s 1      # timeout 5s, only sample 1
+
+# Wait mode (automatic when no samples exist)
+cpt test main.cpp --wait         # force: wait for a NEW problem, discarding old samples
+cpt test main.cpp --wait-timeout 60   # give up after 60 s (0 = wait forever)
+cpt test main.cpp -p 12345 --secret abc  # custom port / shared secret for the server
 
 > Compiler flags mirror `~/.config/nvim/lua/utils.lua` (CompileRun). The compiled
 > binary is kept in the source directory (`main.cpp` → `./main`) after testing, so
