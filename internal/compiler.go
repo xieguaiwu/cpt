@@ -52,7 +52,9 @@ func Compile(source string, lang string) (string, error) {
 
 func compileGXX(source string) (string, error) {
 	out := binaryPath(source)
-	cmd := exec.Command("g++", "-std=c++17", "-O2", "-o", out, source)
+	// Flags aligned with ~/.config/nvim/lua/utils.lua (CompileRun):
+	// g++ -std=c++17 -O2 -Wall -Wextra -Wshadow
+	cmd := exec.Command("g++", "-std=c++17", "-O2", "-Wall", "-Wextra", "-Wshadow", "-o", out, source)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 	if err := cmd.Run(); err != nil {
@@ -111,9 +113,19 @@ func compileJavac(source string) (string, error) {
 	return "java -cp " + dir + " " + className, nil
 }
 
-// binaryPath generates a unique temporary output path for the compiled binary.
+// binaryPath returns the output path for the compiled binary: same directory
+// as the source, named after the source basename without extension
+// (main.cpp → ./main), mirroring nvim's `-o %<` behavior.
+// The binary is intentionally kept after testing so it can be reused,
+// e.g. for running custom samples manually or via `cpt run ./main`.
+// Note: a bare "main" would make exec fall back to $PATH lookup and fail,
+// so relative paths get an explicit "./" prefix.
 func binaryPath(source string) string {
 	base := filepath.Base(source)
 	name := strings.TrimSuffix(base, filepath.Ext(source))
-	return filepath.Join(os.TempDir(), fmt.Sprintf("cpt_%s_%d", name, os.Getpid()))
+	dir := filepath.Dir(source)
+	if dir == "." {
+		return "./" + name
+	}
+	return filepath.Join(dir, name)
 }

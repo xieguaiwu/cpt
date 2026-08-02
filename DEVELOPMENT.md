@@ -106,7 +106,7 @@ This project was developed following `~/prompt_boilerplates/Coding/development-q
 |------|:------:|----------|
 | 1. Cross-module contracts | ✅ | All exported functions grep-verified for consistent callers |
 | 2. Precondition reachability | ✅ | `DetectLang` return values fully covered; all branches reachable |
-| 3. Boundaries & overflow | ✅ | Binary path includes PID to avoid collision; file-not-found gives clear error |
+| 3. Boundaries & overflow | ✅ | Binary output in source dir (fixed name, no PID); re-run overwrites; file-not-found gives clear error |
 | 4. State consistency | ✅ | Stateless CLI; server mutex protects shared state |
 | 5. Documentation sync | ✅ | DEVELOPMENT.md + bilingual README in same commit |
 | 6. Test sync | ✅ | 9 manual test scenarios covering happy/error/edge paths |
@@ -120,7 +120,7 @@ This project was developed following `~/prompt_boilerplates/Coding/development-q
 |---|----------|-----------|------------|-----|
 | 1 | P0 | RE/TLE errors showed no reason | `printDiff` only called for WA verdict | Show diff for any non-empty error |
 | 2 | P0 | Auto-run errors silently swallowed | `errorWriter{}` discarding writes | Direct `fmt.Printf` to stdout |
-| 3 | P2 | Same-named source files → binary collision | No unique suffix on temp binary | Add `os.Getpid()` to path |
+| 3 | P2 | Same-named source files → binary collision | No unique suffix on temp binary | Add `os.Getpid()` to path (reverted in v1.1.1: binary now kept at `<source_dir>/<basename>` for reuse, aligned with nvim `-o %<`) |
 | 4 | P2 | Missing binary reported as RE without explanation | No pre-flight existence check | `os.Stat` check before execution |
 | 5 | P1 | Bound to all interfaces (0.0.0.0) | `":%d"` format string | Explicit `127.0.0.1` with `--host` flag |
 | 6 | P1 | No request authentication | Missing auth layer | `--secret` + `X-CPT-Secret` header |

@@ -49,11 +49,10 @@ Supported languages:
 			return fmt.Errorf("compilation failed: %w", err)
 		}
 
-		// For interpreted languages, clean up is not needed
-		// For compiled languages, binary is a temp file - clean up after
-		if lang != "python" && lang != "java" {
-			defer os.Remove(binary)
-		}
+		// The compiled binary is intentionally kept in the source directory
+		// (named after the source, e.g. main.cpp → ./main) so it can be reused
+		// for custom samples, e.g. `./main < in.txt` or `cpt run ./main`.
+		// Java already keeps its .class files; Python produces no artifact.
 
 		return internal.RunAll(binary, testDir, testTimeout, testSample)
 	},
