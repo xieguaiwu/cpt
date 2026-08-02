@@ -15,8 +15,8 @@
     "semantic_hash": "9bdb3955139d1fa906210fe0d1bd0f45"
   },
   "cmd/test.go": {
-    "mtime": 1785651022.0842552,
-    "ast_hash": "fc06baa782e99c9684f014d2e0d1b104",
+    "mtime": 1785658247.7633262,
+    "ast_hash": "270c6dc7dc2238c91c6bfbe1300d4258",
     "semantic_hash": ""
   },
   "go.mod": {
@@ -40,9 +40,9 @@
     "semantic_hash": "2c6bf6b0f5da411eeb3b2a8a41240f5a"
   },
   "internal/server.go": {
-    "mtime": 1785048858.1863184,
-    "ast_hash": "64b0c952f7beadb231f34ef250441282",
-    "semantic_hash": "64b0c952f7beadb231f34ef250441282"
+    "mtime": 1785658200.5150106,
+    "ast_hash": "1bad8126ab1f7e4c30b50858606d2b3d",
+    "semantic_hash": ""
   },
   "main.go": {
     "mtime": 1785036204.0696378,
@@ -1965,18 +1965,18 @@
     "semantic_hash": "fec4aa34d2ddd279754d153b167742f3"
   },
   "DEVELOPMENT.md": {
-    "mtime": 1785651025.4572847,
-    "ast_hash": "5c211a2771c7b2a75844e80926f3888b",
+    "mtime": 1785658329.3681364,
+    "ast_hash": "de2a80e1cbb57090d6d502bad0897344",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1785651294.125623,
-    "ast_hash": "ee0a483598db9bf3a86e12f2787d6106",
+    "mtime": 1785658283.3775642,
+    "ast_hash": "099c3d02c12786f087afbfcad2eef668",
     "semantic_hash": ""
   },
   "README_zh.md": {
-    "mtime": 1785651310.6077664,
-    "ast_hash": "beb3b5d72db3b3c335a3520ac1317e14",
+    "mtime": 1785658308.3057306,
+    "ast_hash": "20ec1af499594ead22408034610d3b25",
     "semantic_hash": ""
   },
   "vendor/github.com/fatih/color/README.md": {

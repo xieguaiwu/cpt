@@ -1,23 +1,23 @@
 # Graph Report - cpt  (2026-08-02)
 
 ## Corpus Check
-- 407 files · ~854,326 words
+- 407 files · ~855,497 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 12616 nodes · 23693 edges · 1066 communities (538 shown, 528 thin omitted)
-- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 2836 edges (avg confidence: 0.8)
+- 12620 nodes · 23701 edges · 1107 communities (567 shown, 540 thin omitted)
+- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 2839 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6c863087`
+- Built from commit: `681b951f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - zsyscall_freebsd_386.go
 - zsyscall_windows.go
-- Pointer
+- zsyscall_solaris_amd64.go
 - zsyscall_darwin_arm64.go
 - BytePtrFromString
 - zsyscall_zos_s390x.go
@@ -28,7 +28,7 @@
 - zsyscall_openbsd_arm64.go
 - zsyscall_openbsd_riscv64.go
 - zsyscall_netbsd_386.go
-- zsyscall_netbsd_amd64.go
+- Pointer
 - zsyscall_netbsd_arm64.go
 - types_windows.go
 - security_windows.go
@@ -61,7 +61,7 @@
 - zsyscall_linux_mips64.go
 - zsyscall_linux_loong64.go
 - zsyscall_linux_mips64le.go
-- color.go
+- DecomposeCommandLine
 - ztypes_linux_386.go
 - ztypes_linux_amd64.go
 - ztypes_linux_arm.go
@@ -85,7 +85,7 @@
 - syscall_freebsd.go
 - ztypes_aix_ppc.go
 - ztypes_aix_ppc64.go
-- Color
+- color.go
 - Duration
 - ztypes_netbsd_386.go
 - ztypes_netbsd_amd64.go
@@ -128,38 +128,38 @@
 - NsecToTimespec
 - arm64 Process Syscalls
 - completions.go
-- emptyIovecs
-- .HasParent
+- appendBytes
+- HWND
 - arm Process Syscalls
 - UTF16PtrFromString
 - 386 Process Syscalls
-- .Flags
-- Test Runner
+- EventPort
+- Server
 - mips64x Stat Syscalls
 - s390x Process Syscalls
 - WaitStatus
-- zsyscall_netbsd_arm.go
+- Prlimit
 - Socket Functions
-- genFishComp
+- ZosFdToPath
 - Windows NT Syscalls
 - Float32 Slice Flag
-- Float64 Slice Flag
-- Int32 Slice Flag
-- Int64 Slice Flag
+- float64_slice.go
+- int32_slice.go
+- int64_slice.go
 - Uint Slice Flag
-- DecomposeCommandLine
+- BytePtrFromString
 - Int Slice Flag
 - syscall_linux_loong64.go
 - Bool Flag
 - PPSK Time
 - syscall_linux_386.go
 - syscall_linux_arm.go
-- defaultUsageFunc
-- CPU Affinity
+- _Socklen
+- CPUSet
 - String Array Flag
 - syscall_linux_riscv64.go
 - Extended Attributes
-- Filetime
+- _Socklen
 - Count Flag
 - Float32 Flag
 - Float64 Flag
@@ -182,23 +182,23 @@
 - syscall_linux_arm64.go
 - mipsx Stat Syscalls
 - Windows Service Control
-- .InitDefaultHelpCmd
-- Command Arguments
+- _Socklen
+- cobra.go
 - Text Flag
 - Directory Entries
 - syscall_linux_ppc.go
 - Flag Groups
 - Flag Annotations
-- Value
+- _Socklen
 - Wait Status Extended
 - FreeBSD Capabilities
 - Wait Status Signals
 - amd64 Stat Syscalls
 - Poll/Select Syscalls
 - Socket Syscalls (impl)
-- Cobra Template Functions
+- _Socklen
 - Bool Slice Flag
-- Ifreq
+- FdSet
 - Wait Status AIX?
 - Wait Status (dup)
 - Go Syscall Wrappers
@@ -208,7 +208,7 @@
 - Time Syscalls (BSD)
 - Time Syscalls (BSD2)
 - BoolFunc Flag
-- Ioctl Signed
+- _Socklen
 - Ioctl Unsigned
 - AIX ppc64 Stat Syscalls
 - Dragonfly amd64 Syscalls
@@ -216,7 +216,7 @@
 - FreeBSD arm64 Syscalls
 - syscall_freebsd_riscv64.go
 - _Socklen
-- Timeval
+- float64SliceValue
 - Security Policy
 - WaitStatus
 - PSAPI_WORKING_SET_EX_BLOCK
@@ -247,7 +247,7 @@
 - _Socklen
 - Cobra User Contract
 - _Socklen
-- _Socklen
+- int32SliceValue
 - _Socklen
 - ExternProc
 - ExternProc
@@ -256,24 +256,24 @@
 - fileHandle
 - bytes2iovec
 - syscall_linux_sparc64.go
+- int64SliceValue
 - Timespec
-- Timespec
-- Timeval
+- Connectx
 - Timespec
 - Command
 - boolSliceValue
 - ipSliceValue
 - Getitimer
-- syscall_solaris.go
+- emptyIovecs
 - Timeval
-- _C_int
+- connectx
 - Contributing to Cobra
 - ByteSliceFromString
 - .genPowerShellCompletion
 - Timeval
 - _C_int
-- Fstatat
-- Statfs
+- Timespec
+- Timeval
 - Timeval
 - _C_int
 - zptrace_x86_linux.go
@@ -297,15 +297,15 @@
 - Getrlimit
 - fcntl_darwin.go
 - mremapMmapper
-- isatty_windows.go
-- openat2
+- .string
+- Timeval
 - syscall_unix_gc.go
 - syscall_unix_gc_ppc64x.go
 - wait4
 - wait4
 - wait4
-- .tipcAddr
-- isatty_solaris.go
+- Timeval
+- Timeval
 - futimesat
 - futimesat
 - futimesat
@@ -323,14 +323,14 @@
 - File Control Calls
 - Gettimeofday Syscall
 - Raw Socket Syscalls
-- Raw Socket Syscalls
+- Timeval
 - Solaris Time Types
 - File Stat Calls
 - File Stat Calls
 - Clock and Sleep Calls
 - File Stat Calls
-- seek
-- Signal
+- _C_int
+- openat
 - File Stat Calls
 - File Stat Calls
 - File Stat Calls
@@ -340,9 +340,9 @@
 - File Stat Calls
 - File Stat Calls
 - File Stat Calls
-- getgroups
+- wait4
 - File Stat Calls
-- recvmsg
+- wait4
 - File Stat Calls
 - Linux Capabilities
 - Ptrace Register Access
@@ -351,9 +351,9 @@
 - Gettimeofday Implementation
 - Memory Mapping
 - File Control Calls
-- GetsockoptIPv6MTUInfo
+- wait4
 - Filesystem Stat Calls
-- Getrlimit
+- Fstatat
 - Filesystem Stat Calls
 - BPF and Network Stats
 - BPF and Network Stats
@@ -363,7 +363,7 @@
 - BPF and Resource Usage
 - BPF and Resource Usage
 - BPF and Resource Usage
-- Kill
+- wait4
 - Windows API Types
 - Windows API Types
 - Windows API Types
@@ -371,7 +371,7 @@
 - Development Documentation
 - Keyctl DH Operations
 - Time Conversion Methods
-- TIPC Socket Address
+- Timespec
 - Windows Command Execution
 - Auxiliary Vector Access
 - MsgHdr Set Methods
@@ -386,6 +386,7 @@
 - MsgHdr Set Methods
 - Hurd Ioctl Calls
 - Hurd Terminal Types
+- Timespec
 - MsgHdr Set Methods
 - Ptrace PC Access
 - MsgHdr Set Methods
@@ -432,6 +433,16 @@
 - File System Stats
 - Group ID Management
 - Socket Message IO
+- Timespec
+- Fstatat
+- Fstatat
+- impl_utimensat
+- Execute
+- utimensat
+- Statfs
+- Statfs
+- getgroups
+- readdir_r
 - Group ID Management
 - File Stat Operations
 - File System Stats
@@ -461,8 +472,12 @@
 - File System Stats
 - Group ID Management
 - Socket Message IO
+- recvmsg
+- capRightsGet
 - Group ID Management
 - Socket Message IO
+- Fstatat
+- Statfs
 - Group ID Management
 - Socket Message IO
 - OpenBSD Sysctl
@@ -510,6 +525,7 @@
 - Interface Resource Usage
 - Timespec Nano Unix
 - Timeval Nano Unix
+- getgroups
 - Floating Point Registers
 - Z/OS Resource Timing
 - Colorable Test Script
@@ -540,6 +556,8 @@
 - CMSG Header SetLen
 - IO Vector SetLen
 - Ptrace IO Descriptor
+- recvmsg
+- capRightsGet
 - CMSG Header SetLen
 - IO Vector SetLen
 - Raw Sockaddr NFC SetLen
@@ -612,6 +630,8 @@
 - FS Stat
 - File Time
 - System Info
+- Fstatat
+- Statfs
 - Resource Limits
 - Poll Syscall
 - Signal Handling
@@ -625,6 +645,12 @@
 - Resource Limits
 - Poll Syscall
 - Signal Handling
+- getgroups
+- recvmsg
+- Statvfs1
+- getgroups
+- recvmsg
+- getgroups
 - Epoll Wait
 - 32-bit Resource Limit
 - Time Syscall
@@ -672,8 +698,12 @@
 - Epoll events
 - Resource limits
 - File time update
+- recvmsg
+- Getrlimit
 - Resource limits
 - Signal handling
+- Setattrlist
+- poll
 - Resource limits
 - Signal handling
 - Filesystem stats
@@ -960,6 +990,18 @@
 - cpt Package
 - ipNetSliceValue
 - Mount Attributes
+- shmctl
+- Getrlimit
+- poll
+- Kill
+- Getrlimit
+- poll
+- Kill
+- Getrlimit
+- poll
+- Kill
+- Getrlimit
+- Kill
 
 ## God Nodes (most connected - your core abstractions)
 1. `Pointer` - 3796 edges
@@ -978,45 +1020,45 @@
   internal/parser.go → vendor/golang.org/x/sys/windows/syscall_windows.go
 - `RunTest()` --calls--> `ReadFile()`  [INFERRED]
   internal/runner.go → vendor/golang.org/x/sys/windows/syscall_windows.go
-- `main()` --calls--> `Execute()`  [INFERRED]
-  main.go → cmd/root.go
-- `RunTest()` --references--> `Duration()`  [EXTRACTED]
-  internal/runner.go → vendor/github.com/spf13/pflag/duration.go
 - `printDiff()` --calls--> `Green()`  [INFERRED]
   internal/runner.go → vendor/github.com/fatih/color/color.go
+- `printDiff()` --calls--> `Red()`  [INFERRED]
+  internal/runner.go → vendor/github.com/fatih/color/color.go
+- `main()` --calls--> `Execute()`  [INFERRED]
+  main.go → cmd/root.go
 
 ## Import Cycles
 - None detected.
 
-## Communities (1066 total, 528 thin omitted)
+## Communities (1107 total, 540 thin omitted)
 
 ### Community 0 - "zsyscall_freebsd_386.go"
-Cohesion: 0.01
-Nodes (110): accept(), accept4(), Access(), Adjtime(), bind(), capRightsGet(), capRightsLimit(), Chdir() (+102 more)
+Cohesion: 0.02
+Nodes (59): Access(), Chdir(), Chflags(), Chmod(), Chown(), Chroot(), ExtattrDeleteFd(), ExtattrDeleteFile() (+51 more)
 
 ### Community 1 - "zsyscall_windows.go"
 Cohesion: 0.02
-Nodes (287): Token, init(), LoadResourceData(), Seek(), WaitForMultipleObjects(), WSASendto(), AcceptEx(), AddDllDirectory() (+279 more)
+Nodes (282): init(), LoadResourceData(), Seek(), WaitForMultipleObjects(), WSASendto(), AcceptEx(), AddDllDirectory(), AssignProcessToJobObject() (+274 more)
 
-### Community 2 - "Pointer"
+### Community 2 - "zsyscall_solaris_amd64.go"
 Cohesion: 0.02
-Nodes (218): Termio, strbuf, raceAcquire(), raceReadRange(), raceReleaseMerge(), raceWriteRange(), raceAcquire(), raceReadRange() (+210 more)
+Nodes (221): FileInfo, Termio, strbuf, IsTerminal(), Acct(), createFileObjCookie(), direntNamlen(), direntReclen() (+213 more)
 
 ### Community 3 - "zsyscall_darwin_arm64.go"
-Cohesion: 0.01
-Nodes (126): accept(), Access(), Adjtime(), bind(), Chdir(), Chflags(), Chmod(), Chown() (+118 more)
+Cohesion: 0.02
+Nodes (65): Access(), Chdir(), Chflags(), Chmod(), Chown(), Chroot(), Clonefile(), Clonefileat() (+57 more)
 
 ### Community 4 - "BytePtrFromString"
-Cohesion: 0.02
-Nodes (129): BytePtrFromString(), Mount(), accept(), Access(), Adjtime(), bind(), Chdir(), Chflags() (+121 more)
+Cohesion: 0.01
+Nodes (236): BytePtrFromString(), Mount(), accept(), Access(), Adjtime(), bind(), Chdir(), Chflags() (+228 more)
 
 ### Community 5 - "zsyscall_zos_s390x.go"
 Cohesion: 0.02
-Nodes (112): funcptrtest(), getPpaOffset(), isValidLeFunc(), safeload(), enter_Dirfd(), enter_Dup3(), enter_EpollCreate(), enter_EpollCreate1() (+104 more)
+Nodes (124): funcptrtest(), getPpaOffset(), isValidLeFunc(), safeload(), Chroot(), enter_Dirfd(), enter_Dup3(), enter_EpollCreate() (+116 more)
 
 ### Community 6 - "syscall_zos_s390x.go"
 Cohesion: 0.02
-Nodes (153): nwmConnEntry, nwmFilter, nwmHeader, nwmQuadruplet, nwmRecHeader, nwmTCPStatsEntry, nwmTriplet, UtimesNano() (+145 more)
+Nodes (140): nwmConnEntry, nwmFilter, nwmHeader, nwmQuadruplet, nwmRecHeader, nwmTCPStatsEntry, nwmTriplet, CallLeFuncWithPtrReturn() (+132 more)
 
 ### Community 7 - "zsyscall_freebsd_arm64.go"
 Cohesion: 0.01
@@ -1028,7 +1070,7 @@ Nodes (110): accept(), accept4(), Access(), Adjtime(), bind(), capRightsGet(), c
 
 ### Community 9 - "zsyscall_openbsd_386.go"
 Cohesion: 0.02
-Nodes (52): Access(), Chdir(), Chflags(), Chmod(), Chown(), Chroot(), Faccessat(), Fchmodat() (+44 more)
+Nodes (106): accept(), Access(), Adjtime(), bind(), Chdir(), Chflags(), Chmod(), Chown() (+98 more)
 
 ### Community 10 - "zsyscall_openbsd_arm64.go"
 Cohesion: 0.02
@@ -1040,11 +1082,11 @@ Nodes (106): accept(), Access(), Adjtime(), bind(), Chdir(), Chflags(), Chmod(),
 
 ### Community 12 - "zsyscall_netbsd_386.go"
 Cohesion: 0.02
-Nodes (107): accept(), Access(), Adjtime(), bind(), Chdir(), Chflags(), Chmod(), Chown() (+99 more)
+Nodes (58): Access(), Chdir(), Chflags(), Chmod(), Chown(), Chroot(), ExtattrDeleteFd(), ExtattrDeleteFile() (+50 more)
 
-### Community 13 - "zsyscall_netbsd_amd64.go"
-Cohesion: 0.02
-Nodes (107): accept(), Access(), Adjtime(), bind(), Chdir(), Chflags(), Chmod(), Chown() (+99 more)
+### Community 13 - "Pointer"
+Cohesion: 0.01
+Nodes (156): ifreqData, Ifreq, IoctlIfreq(), Termios, Winsize, IoctlGetInt(), IoctlGetTermios(), IoctlGetWinsize() (+148 more)
 
 ### Community 14 - "zsyscall_netbsd_arm64.go"
 Cohesion: 0.02
@@ -1052,19 +1094,19 @@ Nodes (107): accept(), Access(), Adjtime(), bind(), Chdir(), Chflags(), Chmod(),
 
 ### Community 15 - "types_windows.go"
 Cohesion: 0.02
-Nodes (143): JOBOBJECT_BASIC_LIMIT_INFORMATION, ProcThreadAttributeListContainer, GetStartupInfo(), SetConsoleCursorPosition(), GUID, GUID, NTStatus, NTString (+135 more)
+Nodes (160): JOBOBJECT_BASIC_LIMIT_INFORMATION, FindFirstFile(), FindNextFile(), Gettimeofday(), Timespec, Timeval, SetConsoleCursorPosition(), SetsockoptTimeval() (+152 more)
 
 ### Community 16 - "security_windows.go"
-Cohesion: 0.03
-Nodes (98): ACLFromEntries(), BuildSecurityDescriptor(), CreateWellKnownDomainSid(), CreateWellKnownSid(), GetCurrentProcessToken(), GetCurrentThreadEffectiveToken(), GetCurrentThreadToken(), GetNamedSecurityInfo() (+90 more)
+Cohesion: 0.04
+Nodes (92): ACLFromEntries(), BuildSecurityDescriptor(), CreateWellKnownDomainSid(), CreateWellKnownSid(), GetNamedSecurityInfo(), GetSecurityInfo(), GetSystemDirectory(), GetSystemWindowsDirectory() (+84 more)
 
 ### Community 17 - "zsyscall_linux.go"
 Cohesion: 0.01
-Nodes (114): Sysinfo_t, Timex, RemoteIovec, KeyctlJoinSessionKeyring(), KeyctlRestrictKeyring(), KeyctlSearch(), NameToHandleAt(), Reboot() (+106 more)
+Nodes (115): Sysinfo_t, Timex, RemoteIovec, KeyctlInstantiateIOV(), KeyctlJoinSessionKeyring(), KeyctlRestrictKeyring(), KeyctlSearch(), Renameat() (+107 more)
 
 ### Community 18 - "GetZosLibVec"
 Cohesion: 0.04
-Nodes (142): CallLeFuncWithErr(), errnoErr2(), GetZosLibVec(), legacyMount(), legacyUnmount(), Remove(), Access(), Chdir() (+134 more)
+Nodes (143): CallLeFuncWithErr(), errnoErr2(), GetZosLibVec(), legacyMount(), legacyUnmount(), Access(), Chdir(), Chmod() (+135 more)
 
 ### Community 19 - "ztypes_linux.go"
 Cohesion: 0.02
@@ -1076,7 +1118,7 @@ Nodes (105): getProcessEntry(), StartedByExplorer(), OpenCurrentProcessToken(), 
 
 ### Community 21 - "DevInfo"
 Cohesion: 0.04
-Nodes (97): Token, GetSystemWindowsDirectory(), GetWindowsDirectory(), TranslateAccountName(), bufToUTF16(), CM_Get_Device_Interface_List(), CM_Get_DevNode_Status(), getRegistryValue() (+89 more)
+Nodes (88): bufToUTF16(), CM_Get_Device_Interface_List(), CM_Get_DevNode_Status(), getRegistryValue(), Errno, GUID, MakeClassInstallHeader(), SetupDiClassGuidsFromNameEx() (+80 more)
 
 ### Community 22 - "zsyscall_aix_ppc64_gc.go"
 Cohesion: 0.05
@@ -1091,16 +1133,16 @@ Cohesion: 0.01
 Nodes (110): accept(), accept4(), Access(), Adjtime(), bind(), capRightsGet(), capRightsLimit(), Chdir() (+102 more)
 
 ### Community 25 - "zsyscall_freebsd_arm.go"
-Cohesion: 0.01
-Nodes (110): accept(), accept4(), Access(), Adjtime(), bind(), capRightsGet(), capRightsLimit(), Chdir() (+102 more)
+Cohesion: 0.02
+Nodes (59): Access(), Chdir(), Chflags(), Chmod(), Chown(), Chroot(), ExtattrDeleteFd(), ExtattrDeleteFile() (+51 more)
 
 ### Community 26 - "syscall_linux.go"
 Cohesion: 0.02
-Nodes (74): PtraceRegs, SockaddrStorage, CanFilter, PacketMreq, TCPMD5Sig, TCPRepairOpt, TpacketReq, TpacketReq3 (+66 more)
+Nodes (67): PtraceRegs, SockaddrStorage, CanFilter, PacketMreq, TCPMD5Sig, TCPRepairOpt, TpacketReq, TpacketReq3 (+59 more)
 
 ### Community 27 - "zsyscall_openbsd_amd64.go"
 Cohesion: 0.02
-Nodes (106): accept(), Access(), Adjtime(), bind(), Chdir(), Chflags(), Chmod(), Chown() (+98 more)
+Nodes (52): Access(), Chdir(), Chflags(), Chmod(), Chown(), Chroot(), Faccessat(), Fchmodat() (+44 more)
 
 ### Community 28 - "zsyscall_openbsd_arm.go"
 Cohesion: 0.02
@@ -1119,8 +1161,8 @@ Cohesion: 0.02
 Nodes (46): Access(), Chdir(), Chflags(), Chmod(), Chown(), Chroot(), Faccessat(), Fchmodat() (+38 more)
 
 ### Community 32 - "FlagSet"
-Cohesion: 0.05
-Nodes (24): ErrorHandling, Flag, InvalidValueError, NormalizedName, ParseErrorsAllowlist, parseFunc, SliceValue, ValueRequiredError (+16 more)
+Cohesion: 0.04
+Nodes (34): ErrorHandling, Flag, flagValueWrapper, goBoolFlag, InvalidValueError, NormalizedName, parseFunc, SliceValue (+26 more)
 
 ### Community 33 - "zsyscall_aix_ppc64.go"
 Cohesion: 0.02
@@ -1135,20 +1177,20 @@ Cohesion: 0.03
 Nodes (35): Chdir(), Chroot(), Fchownat(), getcwd(), getdirent(), Klogctl(), Lchown(), Listen() (+27 more)
 
 ### Community 36 - "syscall_darwin.go"
-Cohesion: 0.04
-Nodes (52): CtlInfo, RawSockaddrCtl, TCPConnectionInfo, IfreqMTU, SockaddrCtl, anyToSockaddrGOOS(), appendBytes(), Connectx() (+44 more)
+Cohesion: 0.06
+Nodes (34): CtlInfo, IfreqMTU, appendBytes(), fdopendir(), Fgetxattr(), Flistxattr(), Fsetxattr(), Getdirentries() (+26 more)
 
 ### Community 37 - "_Socklen"
 Cohesion: 0.03
-Nodes (47): RawSockaddrNFCLLCP, RawSockaddrALG, RawSockaddrCAN, RawSockaddrHCI, RawSockaddrIUCV, RawSockaddrL2, RawSockaddrL2TPIP, RawSockaddrL2TPIP6 (+39 more)
+Nodes (49): RawSockaddrNFCLLCP, RawSockaddrALG, RawSockaddrCAN, RawSockaddrHCI, RawSockaddrIUCV, RawSockaddrL2, RawSockaddrL2TPIP, RawSockaddrL2TPIP6 (+41 more)
 
 ### Community 38 - "syscall_unix.go"
 Cohesion: 0.04
-Nodes (49): Bind(), Connect(), errnoErr(), ErrnoName(), Getpeername(), GetsockoptByte(), GetsockoptICMPv6Filter(), GetsockoptInet4Addr() (+41 more)
+Nodes (54): Bind(), Connect(), errnoErr(), ErrnoName(), Getpeername(), GetsockoptByte(), GetsockoptICMPv6Filter(), GetsockoptInet4Addr() (+46 more)
 
 ### Community 39 - "Errno"
-Cohesion: 0.04
-Nodes (50): CreatePseudoConsole(), ResizePseudoConsole(), CancelMibChangeNotify2(), CoGetObject(), CoInitializeEx(), createPseudoConsole(), DwmGetWindowAttribute(), DwmSetWindowAttribute() (+42 more)
+Cohesion: 0.03
+Nodes (57): Token, Token, GetCurrentProcessToken(), GetCurrentThreadEffectiveToken(), GetCurrentThreadToken(), Token, CreatePseudoConsole(), Token (+49 more)
 
 ### Community 40 - "ztypes_linux_riscv64.go"
 Cohesion: 0.04
@@ -1174,9 +1216,9 @@ Nodes (32): accept4(), bind(), connect(), EpollWait(), fanotifyMark(), Fstatfs()
 Cohesion: 0.04
 Nodes (31): EpollWait(), fanotifyMark(), Fstatfs(), futimesat(), getgroups(), Getrlimit(), Gettimeofday(), EpollEvent (+23 more)
 
-### Community 46 - "color.go"
+### Community 46 - "DecomposeCommandLine"
 Cohesion: 0.10
-Nodes (35): printDiff(), Black(), BlackString(), Blue(), BlueString(), colorPrint(), colorString(), Cyan() (+27 more)
+Nodes (19): ProcThreadAttributeListContainer, CloseOnExec(), CommandLineToArgv(), DecomposeCommandLine(), FullPath(), ProcThreadAttributeListContainer, NewProcThreadAttributeList(), GetStartupInfo() (+11 more)
 
 ### Community 47 - "ztypes_linux_386.go"
 Cohesion: 0.04
@@ -1260,7 +1302,7 @@ Nodes (45): BpfInsn, BpfStat, BpfVersion, BpfZbuf, BpfZbufHeader, _C_int, _C_lon
 
 ### Community 67 - "syscall_freebsd.go"
 Cohesion: 0.06
-Nodes (36): FpReg, PtraceLwpInfoStruct, Reg, Accept4(), anyToSockaddrGOOS(), Getdents(), Getdirentries(), Getfsstat() (+28 more)
+Nodes (35): FpReg, PtraceLwpInfoStruct, Reg, Accept4(), anyToSockaddrGOOS(), Getdents(), Getdirentries(), Getfsstat() (+27 more)
 
 ### Community 68 - "ztypes_aix_ppc.go"
 Cohesion: 0.05
@@ -1270,9 +1312,9 @@ Nodes (40): _C_int, _C_long, _C_long_long, _C_short, Cmsghdr, dev_t, Dirent, FdS
 Cohesion: 0.05
 Nodes (40): _C_int, _C_long, _C_long_long, _C_short, Cmsghdr, dev_t, Dirent, FdSet (+32 more)
 
-### Community 70 - "Color"
-Cohesion: 0.09
-Nodes (16): Execute(), Attribute, Color, main(), BgRGB(), boolPtr(), getCachedColor(), Writer (+8 more)
+### Community 70 - "color.go"
+Cohesion: 0.06
+Nodes (48): Attribute, Color, BgRGB(), Black(), BlackString(), Blue(), BlueString(), boolPtr() (+40 more)
 
 ### Community 71 - "Duration"
 Cohesion: 0.10
@@ -1295,8 +1337,8 @@ Cohesion: 0.05
 Nodes (38): BpfInsn, BpfStat, BpfTimeval, BpfVersion, _C_int, _C_long, _C_long_long, _C_short (+30 more)
 
 ### Community 76 - "Command"
-Cohesion: 0.08
-Nodes (9): Group, tmplFunc, Context, tmpl(), Buffer, Command, Completion, CompletionFunc (+1 more)
+Cohesion: 0.04
+Nodes (25): commandSorterByName, FParseErrWhitelist, Group, tmplFunc, Context, ParseErrorsAllowlist, CheckErr(), tmpl() (+17 more)
 
 ### Community 77 - "ztypes_zos_s390x.go"
 Cohesion: 0.05
@@ -1308,7 +1350,7 @@ Nodes (37): _Fsblkcnt_t, BpfInsn, BpfStat, BpfVersion, _C_int, _C_long, _C_long_
 
 ### Community 79 - "syscall_bsd.go"
 Cohesion: 0.09
-Nodes (32): Clockinfo, KinfoProc, Accept(), anyToSockaddr(), Futimes(), Getsockname(), Getwd(), _C_int (+24 more)
+Nodes (30): Clockinfo, KinfoProc, Accept(), anyToSockaddr(), Futimes(), Getsockname(), _C_int, Kevent_t (+22 more)
 
 ### Community 80 - "ztypes_openbsd_ppc64.go"
 Cohesion: 0.05
@@ -1319,8 +1361,8 @@ Cohesion: 0.05
 Nodes (36): BpfInsn, BpfStat, BpfTimeval, BpfVersion, _C_int, _C_long, _C_long_long, _C_short (+28 more)
 
 ### Community 82 - "dll_windows.go"
-Cohesion: 0.10
-Nodes (19): canDoSearchSystem32(), Errno, Mutex, initCanDoSearchSystem32(), isBaseName(), LoadDLL(), loadLibraryEx(), MustLoadDLL() (+11 more)
+Cohesion: 0.11
+Nodes (18): canDoSearchSystem32(), Errno, Mutex, initCanDoSearchSystem32(), isBaseName(), LoadDLL(), loadLibraryEx(), MustLoadDLL() (+10 more)
 
 ### Community 83 - "ztypes_openbsd_386.go"
 Cohesion: 0.06
@@ -1343,12 +1385,12 @@ Cohesion: 0.06
 Nodes (35): BpfInsn, BpfStat, BpfTimeval, BpfVersion, _C_int, _C_long, _C_long_long, _C_short (+27 more)
 
 ### Community 88 - "Stat_LE_t"
-Cohesion: 0.11
-Nodes (22): direntLE, Stat_LE_t, Closedir(), copyStat(), direntLeToDirentUnix(), Fstat(), Fstatat(), Getdirentries() (+14 more)
+Cohesion: 0.20
+Nodes (14): Stat_LE_t, copyStat(), Fstat(), Fstatat(), Stat_t, Lstat(), Stat(), enter_fstatat() (+6 more)
 
 ### Community 89 - "syscall_aix.go"
 Cohesion: 0.08
-Nodes (20): Accept(), anyToSockaddr(), direntNamlen(), direntReclen(), Getsockname(), Gettimeofday(), Getwd(), Iovec (+12 more)
+Nodes (19): Accept(), anyToSockaddr(), direntNamlen(), direntReclen(), Getsockname(), Gettimeofday(), Iovec, PollFd (+11 more)
 
 ### Community 90 - "zsyscall_linux_amd64.go"
 Cohesion: 0.06
@@ -1359,8 +1401,8 @@ Cohesion: 0.06
 Nodes (33): BpfInsn, BpfStat, BpfVersion, _C_int, _C_long, _C_long_long, _C_short, Clockinfo (+25 more)
 
 ### Community 92 - ".Sprintf"
-Cohesion: 0.18
-Nodes (27): gen(), Command, Command, StringWriter, Writer, nonCompletableFlag(), prepareCustomAnnotationsForFlags(), writeArgAliases() (+19 more)
+Cohesion: 0.09
+Nodes (44): compareOutput(), formatDiff(), printDiff(), RunAll(), RunTest(), trimTrailing(), activeHelpEnvVar(), AppendActiveHelp() (+36 more)
 
 ### Community 93 - "syscall_openbsd.go"
 Cohesion: 0.06
@@ -1384,7 +1426,7 @@ Nodes (13): bytesBase64Value, bytesHexValue, BytesBase64(), BytesBase64P(), Byte
 
 ### Community 98 - "syscall_dragonfly.go"
 Cohesion: 0.09
-Nodes (22): Accept4(), anyToSockaddrGOOS(), direntIno(), direntNamlen(), direntReclen(), Getfsstat(), _C_int, RawSockaddrAny (+14 more)
+Nodes (21): Accept4(), anyToSockaddrGOOS(), direntIno(), direntNamlen(), direntReclen(), Getfsstat(), _C_int, RawSockaddrAny (+13 more)
 
 ### Community 99 - "syscall_netbsd.go"
 Cohesion: 0.08
@@ -1431,40 +1473,44 @@ Cohesion: 0.13
 Nodes (25): SocketControlMessage, Inet4Pktinfo, Inet6Pktinfo, Sockaddr, Ucred, ParseOrigDstAddr(), ParseUnixCredentials(), PktInfo4() (+17 more)
 
 ### Community 110 - "NsecToTimespec"
-Cohesion: 0.16
-Nodes (14): futimesat(), Timeval, utimes(), GetsockoptTimeval(), Timeval, Lutimes(), SetsockoptTimeval(), Time (+6 more)
+Cohesion: 0.11
+Nodes (26): futimesat(), Timeval, utimes(), futimesat(), Timeval, setTimeval(), utimes(), futimesat() (+18 more)
 
 ### Community 111 - "arm64 Process Syscalls"
 Cohesion: 0.07
 Nodes (10): fanotifyMark(), kexecFileLoad(), pread(), pwrite(), Renameat(), sendfile(), setsockopt(), socketpair() (+2 more)
 
 ### Community 112 - "completions.go"
-Cohesion: 0.11
-Nodes (27): CompletionOptions, flagCompError, ShellCompDirective, SliceValue, activeHelpEnvVar(), AppendActiveHelp(), GetActiveHelpConfig(), Command (+19 more)
+Cohesion: 0.15
+Nodes (20): CompletionOptions, flagCompError, ShellCompDirective, SliceValue, checkIfFlagCompletion(), CompError(), CompErrorln(), completeRequireFlags() (+12 more)
 
-### Community 113 - "emptyIovecs"
-Cohesion: 0.10
-Nodes (28): Accept(), Accept4(), anyToSockaddr(), appendBytes(), Getrandom(), Getsockname(), Iovec, RawSockaddrAny (+20 more)
+### Community 113 - "appendBytes"
+Cohesion: 0.12
+Nodes (24): Accept(), Accept4(), anyToSockaddr(), appendBytes(), Getrandom(), Getsockname(), Iovec, RawSockaddrAny (+16 more)
+
+### Community 114 - "HWND"
+Cohesion: 0.12
+Nodes (17): CryptProtectData(), CryptUnprotectData(), DwmGetWindowAttribute(), DwmSetWindowAttribute(), EnumChildWindows(), GetClassName(), GetDesktopWindow(), GetForegroundWindow() (+9 more)
 
 ### Community 115 - "arm Process Syscalls"
 Cohesion: 0.07
 Nodes (11): fanotifyMark(), kexecFileLoad(), Lchown(), pread(), pwrite(), Renameat(), sendfile(), setsockopt() (+3 more)
 
 ### Community 116 - "UTF16PtrFromString"
-Cohesion: 0.09
-Nodes (24): SetupUninstallOEMInf(), Chdir(), Chmod(), FindResource(), Mkdir(), Rename(), Rmdir(), Unlink() (+16 more)
+Cohesion: 0.08
+Nodes (27): TranslateAccountName(), SetupUninstallOEMInf(), Chdir(), Chmod(), FindResource(), Mkdir(), Rename(), Rmdir() (+19 more)
 
 ### Community 117 - "386 Process Syscalls"
 Cohesion: 0.08
 Nodes (8): fanotifyMark(), Lchown(), pread(), pwrite(), Renameat(), sendfile(), Splice(), Truncate()
 
-### Community 118 - ".Flags"
-Cohesion: 0.20
-Nodes (8): FParseErrWhitelist, defaultVersionFunc(), FlagSet, hasNoOptDefVal(), isFlagArg(), shortHasNoOptDefVal(), stripFlags(), NewFlagSet()
+### Community 118 - "EventPort"
+Cohesion: 0.22
+Nodes (6): EventPort, fileObj, fileObjCookie, Mutex, PortEvent, NewEventPort()
 
-### Community 119 - "Test Runner"
-Cohesion: 0.12
-Nodes (17): BatchInfo, SaveSamples(), compareOutput(), formatDiff(), RunAll(), RunTest(), trimTrailing(), Server (+9 more)
+### Community 119 - "Server"
+Cohesion: 0.11
+Nodes (16): clearSamples(), waitForSamples(), BatchInfo, SaveSamples(), Server, Mutex, Time, NewServer() (+8 more)
 
 ### Community 120 - "mips64x Stat Syscalls"
 Cohesion: 0.11
@@ -1475,20 +1521,20 @@ Cohesion: 0.08
 Nodes (9): fanotifyMark(), kexecFileLoad(), Lchown(), pread(), pwrite(), Renameat(), sendfile(), Splice() (+1 more)
 
 ### Community 122 - "WaitStatus"
-Cohesion: 0.10
-Nodes (18): enter_Wait4(), get_Wait4Addr(), Getrusage(), Rusage, Siginfo, Signal, WaitStatus, impl_Wait4() (+10 more)
+Cohesion: 0.12
+Nodes (15): enter_Wait4(), get_Wait4Addr(), Getrusage(), Rusage, Siginfo, Signal, WaitStatus, impl_Wait4() (+7 more)
 
-### Community 123 - "zsyscall_netbsd_arm.go"
-Cohesion: 0.02
-Nodes (107): accept(), Access(), Adjtime(), bind(), Chdir(), Chflags(), Chmod(), Chown() (+99 more)
+### Community 123 - "Prlimit"
+Cohesion: 0.17
+Nodes (13): Getrlimit(), Rlimit, Getrlimit(), Rlimit, Getrlimit(), Rlimit, Rlimit, Getrlimit() (+5 more)
 
 ### Community 124 - "Socket Functions"
 Cohesion: 0.13
 Nodes (20): Accept(), Accept4(), anyToSockaddr(), Bind(), Close(), Connect(), Getpeername(), Getsockname() (+12 more)
 
-### Community 125 - "genFishComp"
-Cohesion: 0.33
-Nodes (4): genFishComp(), Command, StringWriter, Writer
+### Community 125 - "ZosFdToPath"
+Cohesion: 0.20
+Nodes (11): direntLE, Closedir(), direntLeToDirentUnix(), Getdirentries(), Dirent, legacy_Mkfifoat(), Opendir(), Readdir() (+3 more)
 
 ### Community 126 - "Windows NT Syscalls"
 Cohesion: 0.12
@@ -1498,33 +1544,33 @@ Nodes (22): NTStatus, RtlGetVersion(), NTUnicodeString, NtCreateFile(), NtCreate
 Cohesion: 0.13
 Nodes (7): float32SliceValue, Float32Slice(), Float32SliceP(), Float32SliceVar(), Float32SliceVarP(), FlagSet, newFloat32SliceValue()
 
-### Community 128 - "Float64 Slice Flag"
-Cohesion: 0.13
-Nodes (7): float64SliceValue, Float64Slice(), Float64SliceP(), Float64SliceVar(), Float64SliceVarP(), FlagSet, newFloat64SliceValue()
+### Community 128 - "float64_slice.go"
+Cohesion: 0.23
+Nodes (6): Float64Slice(), Float64SliceP(), Float64SliceVar(), Float64SliceVarP(), FlagSet, newFloat64SliceValue()
 
-### Community 129 - "Int32 Slice Flag"
-Cohesion: 0.13
-Nodes (7): int32SliceValue, FlagSet, Int32Slice(), Int32SliceP(), Int32SliceVar(), Int32SliceVarP(), newInt32SliceValue()
+### Community 129 - "int32_slice.go"
+Cohesion: 0.23
+Nodes (6): FlagSet, Int32Slice(), Int32SliceP(), Int32SliceVar(), Int32SliceVarP(), newInt32SliceValue()
 
-### Community 130 - "Int64 Slice Flag"
-Cohesion: 0.13
-Nodes (7): int64SliceValue, FlagSet, Int64Slice(), Int64SliceP(), Int64SliceVar(), Int64SliceVarP(), newInt64SliceValue()
+### Community 130 - "int64_slice.go"
+Cohesion: 0.23
+Nodes (6): FlagSet, Int64Slice(), Int64SliceP(), Int64SliceVar(), Int64SliceVarP(), newInt64SliceValue()
 
 ### Community 131 - "Uint Slice Flag"
 Cohesion: 0.13
 Nodes (7): uintSliceValue, FlagSet, newUintSliceValue(), UintSlice(), UintSliceP(), UintSliceVar(), UintSliceVarP()
 
-### Community 132 - "DecomposeCommandLine"
-Cohesion: 0.06
-Nodes (32): ProcThreadAttributeListContainer, Servent, CloseOnExec(), CommandLineToArgv(), DecomposeCommandLine(), FullPath(), NewProcThreadAttributeList(), BytePtrFromString() (+24 more)
+### Community 132 - "BytePtrFromString"
+Cohesion: 0.11
+Nodes (16): Servent, BytePtrFromString(), BytePtrToString(), ByteSliceFromString(), ByteSliceToString(), NTString, NTString, NTUnicodeString (+8 more)
 
 ### Community 133 - "Int Slice Flag"
 Cohesion: 0.14
 Nodes (7): intSliceValue, FlagSet, IntSlice(), IntSliceP(), IntSliceVar(), IntSliceVarP(), newIntSliceValue()
 
 ### Community 134 - "syscall_linux_loong64.go"
-Cohesion: 0.11
-Nodes (23): StatxTimestamp, Fstat(), Fstatat(), futimesat(), Getrlimit(), FdSet, Rlimit, Stat_t (+15 more)
+Cohesion: 0.15
+Nodes (15): StatxTimestamp, Fstat(), Fstatat(), Stat_t, Time_t, Timespec, Ustat_t, Utimbuf (+7 more)
 
 ### Community 135 - "Bool Flag"
 Cohesion: 0.15
@@ -1535,19 +1581,19 @@ Cohesion: 0.11
 Nodes (19): PPSKInfo, PPSFData, PPSKParams, PPSKTime, PPSKInfo, PPSKInfo, PPSKInfo, PPSKInfo (+11 more)
 
 ### Community 137 - "syscall_linux_386.go"
-Cohesion: 0.09
-Nodes (25): accept4(), bind(), connect(), Fstatfs(), getpeername(), Getrlimit(), getsockname(), getsockopt() (+17 more)
+Cohesion: 0.10
+Nodes (23): accept4(), bind(), connect(), Fstatfs(), getpeername(), getsockname(), getsockopt(), Msghdr (+15 more)
 
 ### Community 138 - "syscall_linux_arm.go"
-Cohesion: 0.10
-Nodes (16): Fstatfs(), Getrlimit(), Rlimit, Statfs_t, Time_t, Timespec, Timeval, rlimit32 (+8 more)
+Cohesion: 0.11
+Nodes (14): Fstatfs(), Statfs_t, Time_t, Timespec, Timeval, rlimit32, Utimbuf, setTimespec() (+6 more)
 
-### Community 139 - "defaultUsageFunc"
-Cohesion: 0.16
-Nodes (3): trimRightSpace(), defaultHelpFunc(), defaultUsageFunc()
+### Community 139 - "_Socklen"
+Cohesion: 0.18
+Nodes (10): RawSockaddrCtl, TCPConnectionInfo, SockaddrCtl, GetsockoptIPMreqn(), GetsockoptTCPConnectionInfo(), GetsockoptXucred(), IPMreqn, _Socklen (+2 more)
 
-### Community 140 - "CPU Affinity"
-Cohesion: 0.21
+### Community 140 - "CPUSet"
+Cohesion: 0.19
 Nodes (12): cpuMask, CPUSet, RISCVHWProbePairs, cpuBitsIndex(), cpuBitsMask(), schedAffinity(), SchedGetaffinity(), SchedSetaffinity() (+4 more)
 
 ### Community 141 - "String Array Flag"
@@ -1555,16 +1601,16 @@ Cohesion: 0.16
 Nodes (7): stringArrayValue, FlagSet, newStringArrayValue(), StringArray(), StringArrayP(), StringArrayVar(), StringArrayVarP()
 
 ### Community 142 - "syscall_linux_riscv64.go"
-Cohesion: 0.10
-Nodes (20): Renameat(), futimesat(), FdSet, Stat_t, Time_t, Timespec, Timeval, Ustat_t (+12 more)
+Cohesion: 0.14
+Nodes (11): Stat_t, Time_t, Timespec, Ustat_t, Utimbuf, Lstat(), setTimespec(), Stat() (+3 more)
 
 ### Community 143 - "Extended Attributes"
 Cohesion: 0.23
 Nodes (17): Fgetxattr(), Flistxattr(), FlistxattrNS(), Fremovexattr(), Fsetxattr(), Getxattr(), initxattrdest(), Lgetxattr() (+9 more)
 
-### Community 144 - "Filetime"
-Cohesion: 0.10
-Nodes (26): FindFirstFile(), FindNextFile(), Gettimeofday(), Timespec, Timeval, SetsockoptTimeval(), Utimes(), UtimesNano() (+18 more)
+### Community 144 - "_Socklen"
+Cohesion: 0.25
+Nodes (11): accept(), accept4(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny (+3 more)
 
 ### Community 145 - "Count Flag"
 Cohesion: 0.15
@@ -1643,8 +1689,8 @@ Cohesion: 0.17
 Nodes (7): uint8Value, FlagSet, newUint8Value(), Uint8(), Uint8P(), Uint8Var(), Uint8VarP()
 
 ### Community 164 - "syscall_linux_arm64.go"
-Cohesion: 0.12
-Nodes (14): Getrlimit(), Rlimit, Stat_t, Time_t, Timespec, Ustat_t, Utimbuf, Lstat() (+6 more)
+Cohesion: 0.13
+Nodes (12): Stat_t, Time_t, Timespec, Ustat_t, Utimbuf, Lstat(), setTimespec(), setTimeval() (+4 more)
 
 ### Community 165 - "mipsx Stat Syscalls"
 Cohesion: 0.13
@@ -1654,13 +1700,13 @@ Nodes (14): Fstatfs(), Getrlimit(), Errno, Rlimit, Statfs_t, Timespec, Timeval, 
 Cohesion: 0.16
 Nodes (15): NotifyServiceStatusChange(), StartServiceCtrlDispatcher(), ENUM_SERVICE_STATUS, ENUM_SERVICE_STATUS_PROCESS, QUERY_SERVICE_CONFIG, QUERY_SERVICE_LOCK_STATUS, SC_ACTION, SERVICE_DELAYED_AUTO_START_INFO (+7 more)
 
-### Community 167 - ".InitDefaultHelpCmd"
-Cohesion: 0.16
-Nodes (3): commandSorterByName, CheckErr(), commandNameMatches()
+### Community 167 - "_Socklen"
+Cohesion: 0.25
+Nodes (11): accept(), accept4(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny (+3 more)
 
-### Community 168 - "Command Arguments"
-Cohesion: 0.24
-Nodes (13): PositionalArgs, ArbitraryArgs(), ExactArgs(), ExactValidArgs(), Command, legacyArgs(), MatchAll(), MaximumNArgs() (+5 more)
+### Community 168 - "cobra.go"
+Cohesion: 0.10
+Nodes (17): PositionalArgs, FuncMap, ArbitraryArgs(), ExactArgs(), ExactValidArgs(), Command, legacyArgs(), MatchAll() (+9 more)
 
 ### Community 169 - "Text Flag"
 Cohesion: 0.29
@@ -1671,8 +1717,8 @@ Cohesion: 0.15
 Nodes (14): ParseDirent(), readInt(), readIntBE(), readIntLE(), direntIno(), direntIno(), direntNamlen(), direntReclen() (+6 more)
 
 ### Community 171 - "syscall_linux_ppc.go"
-Cohesion: 0.11
-Nodes (15): Rlimit, Fstatfs(), Getrlimit(), Errno, Rlimit, Statfs_t, Timespec, Timeval (+7 more)
+Cohesion: 0.14
+Nodes (10): Fstatfs(), Errno, Statfs_t, Timespec, Timeval, rlimit32, seek(), setTimespec() (+2 more)
 
 ### Community 172 - "Flag Groups"
 Cohesion: 0.24
@@ -1682,9 +1728,9 @@ Nodes (8): Command, FlagSet, hasAllFlags(), processFlagForGroupAnnotation(), sor
 Cohesion: 0.24
 Nodes (6): Command, FlagSet, MarkFlagCustom(), MarkFlagDirname(), MarkFlagFilename(), MarkFlagRequired()
 
-### Community 174 - "Value"
-Cohesion: 0.15
-Nodes (11): flagValueWrapper, goBoolFlag, Value, Var(), VarP(), FlagSet, isGotestFlag(), isGotestShorthandFlag() (+3 more)
+### Community 174 - "_Socklen"
+Cohesion: 0.27
+Nodes (10): accept(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny, _Socklen (+2 more)
 
 ### Community 175 - "Wait Status Extended"
 Cohesion: 0.21
@@ -1710,17 +1756,13 @@ Nodes (14): FdSet, PollFd, Sigset_t, Timespec, Poll(), Ppoll(), Pselect(), Pthre
 Cohesion: 0.23
 Nodes (14): accept(), bind(), connect(), enter_accept4(), error_accept4(), get_accept4Addr(), getpeername(), getsockname() (+6 more)
 
-### Community 181 - "Cobra Template Functions"
-Cohesion: 0.15
-Nodes (4): FuncMap, AddTemplateFuncs(), ld(), rpad()
+### Community 181 - "_Socklen"
+Cohesion: 0.27
+Nodes (10): accept(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny, _Socklen (+2 more)
 
 ### Community 182 - "Bool Slice Flag"
 Cohesion: 0.23
 Nodes (6): BoolSlice(), BoolSliceP(), BoolSliceVar(), BoolSliceVarP(), FlagSet, newBoolSliceValue()
-
-### Community 183 - "Ifreq"
-Cohesion: 0.12
-Nodes (6): ifreqData, RawSockaddrPPPoX, SockaddrPPPoE, FdSet, Ifreq, IoctlIfreq()
 
 ### Community 184 - "Wait Status AIX?"
 Cohesion: 0.23
@@ -1758,9 +1800,9 @@ Nodes (12): gettimeofday(), FdSet, Sigset_t, Timespec, Timeval, Timezone, Nanosl
 Cohesion: 0.22
 Nodes (4): boolfuncValue, BoolFunc(), BoolFuncP(), FlagSet
 
-### Community 193 - "Ioctl Signed"
-Cohesion: 0.22
-Nodes (9): Termios, Winsize, IoctlGetInt(), IoctlGetTermios(), IoctlGetWinsize(), IoctlSetPointerInt(), IoctlSetString(), IoctlSetTermios() (+1 more)
+### Community 193 - "_Socklen"
+Cohesion: 0.27
+Nodes (10): accept(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny, _Socklen (+2 more)
 
 ### Community 194 - "Ioctl Unsigned"
 Cohesion: 0.22
@@ -1790,10 +1832,6 @@ Nodes (10): Errno, Kevent_t, num, Timespec, Timeval, sendfile(), SetKevent(), se
 Cohesion: 0.25
 Nodes (11): accept(), accept4(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny (+3 more)
 
-### Community 201 - "Timeval"
-Cohesion: 0.15
-Nodes (16): enter_Futimes(), enter_Futimesat(), enter_Lutimes(), error_Futimes(), error_Futimesat(), error_Lutimes(), get_FutimesAddr(), get_FutimesatAddr() (+8 more)
-
 ### Community 202 - "Security Policy"
 Cohesion: 0.18
 Nodes (10): Acknowledgments, `cobra` Security Best Practices for Users, Disclosure Policy, Reporting a Vulnerability, Response Process, Security Best Practices for Contributors, Security Policy, Security Updates and CVEs (+2 more)
@@ -1815,8 +1853,8 @@ Cohesion: 0.31
 Nodes (8): PtraceRegsArm, PtraceRegsArm64, PtraceGetRegsArm(), PtraceGetRegsArm64(), PtraceSetRegsArm(), PtraceSetRegsArm64(), PtraceGetRegSetArm64(), PtraceSetRegSetArm64()
 
 ### Community 209 - "pselect6"
-Cohesion: 0.33
-Nodes (6): sigset_argpack, FdSet, Select(), FdSet, pselect6(), Sigset_t
+Cohesion: 0.20
+Nodes (10): sigset_argpack, FdSet, Select(), FdSet, Select(), FdSet, Select(), FdSet (+2 more)
 
 ### Community 210 - "_Socklen"
 Cohesion: 0.20
@@ -1906,10 +1944,6 @@ Nodes (9): Backward Compatibility, Breaking Changes, CI Testing, Cobra User Cont
 Cohesion: 0.27
 Nodes (10): accept(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny, _Socklen (+2 more)
 
-### Community 232 - "_Socklen"
-Cohesion: 0.27
-Nodes (10): accept(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny, _Socklen (+2 more)
-
 ### Community 233 - "_Socklen"
 Cohesion: 0.27
 Nodes (10): accept(), bind(), connect(), getpeername(), getsockname(), getsockopt(), RawSockaddrAny, _Socklen (+2 more)
@@ -1931,8 +1965,8 @@ Cohesion: 0.25
 Nodes (3): InvalidSyntaxError, NotExistError, notExistErrorMessageType
 
 ### Community 238 - "fileHandle"
-Cohesion: 0.38
-Nodes (4): fileHandle, NewFileHandle(), OpenByHandleAt(), openByHandleAt()
+Cohesion: 0.31
+Nodes (6): fileHandle, NameToHandleAt(), NewFileHandle(), OpenByHandleAt(), nameToHandleAt(), openByHandleAt()
 
 ### Community 239 - "bytes2iovec"
 Cohesion: 0.33
@@ -1942,17 +1976,13 @@ Nodes (8): Accept4(), bytes2iovec(), Iovec, Sockaddr, Preadv(), Pwritev(), Readv
 Cohesion: 0.22
 Nodes (6): Time_t, Timespec, Timeval, setTimespec(), setTimeval(), Time()
 
-### Community 241 - "Timespec"
-Cohesion: 0.22
-Nodes (9): ClockGettime(), PollFd, Sigset_t, Timespec, kevent(), Nanosleep(), poll(), ppoll() (+1 more)
-
 ### Community 242 - "Timespec"
 Cohesion: 0.22
 Nodes (9): ClockGettime(), PollFd, Sigset_t, Timespec, kevent(), Nanosleep(), poll(), ppoll() (+1 more)
 
-### Community 243 - "Timeval"
-Cohesion: 0.25
-Nodes (8): Adjtime(), futimes(), Gettimeofday(), FdSet, Timeval, Select(), Settimeofday(), utimes()
+### Community 243 - "Connectx"
+Cohesion: 0.22
+Nodes (8): anyToSockaddrGOOS(), Connectx(), RawSockaddrAny, RawSockaddrVM, SaeAssocID, SaeConnID, Sockaddr, SockaddrVM
 
 ### Community 244 - "Timespec"
 Cohesion: 0.22
@@ -1962,17 +1992,17 @@ Nodes (9): ClockGettime(), PollFd, Sigset_t, Timespec, kevent(), Nanosleep(), po
 Cohesion: 0.32
 Nodes (8): ItimerWhich, Getitimer(), Itimerval, MakeItimerval(), Setitimer(), getitimer(), Itimerval, setitimer()
 
-### Community 249 - "syscall_solaris.go"
-Cohesion: 0.04
-Nodes (48): FileInfo, EventPort, fileObj, fileObjCookie, Accept(), Acct(), anyToSockaddr(), createFileObjCookie() (+40 more)
+### Community 249 - "emptyIovecs"
+Cohesion: 0.10
+Nodes (19): Iovec, RawSockaddrAny, recvmsgRaw(), sendmsgN(), Accept(), anyToSockaddr(), Getsockname(), GetsockoptString() (+11 more)
 
 ### Community 250 - "Timeval"
 Cohesion: 0.25
 Nodes (8): Adjtime(), futimes(), Gettimeofday(), FdSet, Timeval, Select(), Settimeofday(), utimes()
 
-### Community 251 - "_C_int"
-Cohesion: 0.25
-Nodes (8): getresgid(), getresuid(), Getrusage(), _C_int, Rusage, pipe2(), sysctl(), wait4()
+### Community 251 - "connectx"
+Cohesion: 0.22
+Nodes (9): connectx(), Iovec, SaeAssocID, SaeConnID, SaEndpoints, preadv(), pwritev(), readv() (+1 more)
 
 ### Community 252 - "Contributing to Cobra"
 Cohesion: 0.29
@@ -1990,13 +2020,13 @@ Nodes (8): Adjtime(), futimes(), Gettimeofday(), FdSet, Timeval, Select(), Setti
 Cohesion: 0.25
 Nodes (8): getresgid(), getresuid(), Getrusage(), _C_int, Rusage, pipe2(), sysctl(), wait4()
 
-### Community 257 - "Fstatat"
-Cohesion: 0.40
-Nodes (5): Fstat(), Fstatat(), Stat_t, Lstat(), Stat()
+### Community 257 - "Timespec"
+Cohesion: 0.22
+Nodes (9): ClockGettime(), PollFd, Sigset_t, Timespec, kevent(), Nanosleep(), poll(), ppoll() (+1 more)
 
-### Community 258 - "Statfs"
-Cohesion: 0.50
-Nodes (4): Fstatfs(), getfsstat(), Statfs_t, Statfs()
+### Community 258 - "Timeval"
+Cohesion: 0.25
+Nodes (8): Adjtime(), futimes(), Gettimeofday(), FdSet, Timeval, Select(), Settimeofday(), utimes()
 
 ### Community 259 - "Timeval"
 Cohesion: 0.25
@@ -2090,13 +2120,13 @@ Nodes (4): Fstore_t, FcntlFlock(), FcntlFstore(), Flock_t
 Cohesion: 0.33
 Nodes (3): mmapper, mremapMmapper, MremapPtr()
 
-### Community 282 - "isatty_windows.go"
-Cohesion: 0.47
-Nodes (4): getFileNameByHandle(), isCygwinPipeName(), IsCygwinTerminal(), IsTerminal()
+### Community 282 - ".string"
+Cohesion: 0.11
+Nodes (18): getFileNameByHandle(), isCygwinPipeName(), IsCygwinTerminal(), IsTerminal(), Getwd(), Getwd(), Getwd(), KeyctlString() (+10 more)
 
-### Community 284 - "openat2"
-Cohesion: 0.33
-Nodes (6): OpenHow, Openat2(), OpenHow, Openat2(), OpenHow, openat2()
+### Community 284 - "Timeval"
+Cohesion: 0.25
+Nodes (8): Adjtime(), futimes(), Gettimeofday(), FdSet, Timeval, Select(), Settimeofday(), utimes()
 
 ### Community 285 - "syscall_unix_gc.go"
 Cohesion: 0.53
@@ -2117,6 +2147,14 @@ Nodes (6): Getrusage(), _C_int, Pid_t, Rusage, pipe(), wait4()
 ### Community 289 - "wait4"
 Cohesion: 0.33
 Nodes (6): Getrusage(), _C_int, Rusage, pipe2(), sysctl(), wait4()
+
+### Community 290 - "Timeval"
+Cohesion: 0.25
+Nodes (8): Adjtime(), futimes(), Gettimeofday(), FdSet, Timeval, Select(), Settimeofday(), utimes()
+
+### Community 291 - "Timeval"
+Cohesion: 0.25
+Nodes (8): Adjtime(), futimes(), Gettimeofday(), FdSet, Timeval, Select(), Settimeofday(), utimes()
 
 ### Community 292 - "futimesat"
 Cohesion: 0.33
@@ -2178,9 +2216,9 @@ Nodes (4): gettimeofday(), Errno, Timeval, realGettimeofday()
 Cohesion: 0.60
 Nodes (4): Errno, rawsocketcall(), seek(), socketcall()
 
-### Community 309 - "Raw Socket Syscalls"
-Cohesion: 0.60
-Nodes (4): Errno, rawsocketcall(), seek(), socketcall()
+### Community 309 - "Timeval"
+Cohesion: 0.25
+Nodes (8): Adjtime(), futimes(), Gettimeofday(), FdSet, Timeval, Select(), Settimeofday(), utimes()
 
 ### Community 310 - "Solaris Time Types"
 Cohesion: 0.40
@@ -2202,9 +2240,13 @@ Nodes (5): ClockGettime(), Timespec, kevent(), Nanosleep(), utimensat()
 Cohesion: 0.40
 Nodes (5): Fstat(), Fstatat(), Stat_t, Lstat(), Stat()
 
-### Community 316 - "Signal"
-Cohesion: 0.67
-Nodes (3): Signal, SignalName(), SignalNum()
+### Community 315 - "_C_int"
+Cohesion: 0.25
+Nodes (8): getresgid(), getresuid(), Getrusage(), _C_int, Rusage, pipe2(), sysctl(), wait4()
+
+### Community 316 - "openat"
+Cohesion: 0.33
+Nodes (6): Creat(), Open(), Openat(), Openat(), Openat(), openat()
 
 ### Community 317 - "File Stat Calls"
 Cohesion: 0.40
@@ -2242,17 +2284,17 @@ Nodes (5): Fstat(), Fstatat(), Stat_t, Lstat(), Stat()
 Cohesion: 0.40
 Nodes (5): Fstat(), Fstatat(), Stat_t, Lstat(), Stat()
 
-### Community 326 - "getgroups"
-Cohesion: 0.67
-Nodes (3): getgroups(), _Gid_t, setgroups()
+### Community 326 - "wait4"
+Cohesion: 0.33
+Nodes (6): Getrusage(), _C_int, Rusage, pipe2(), sysctl(), wait4()
 
 ### Community 327 - "File Stat Calls"
 Cohesion: 0.40
 Nodes (5): Fstat(), Fstatat(), Stat_t, Lstat(), Stat()
 
-### Community 328 - "recvmsg"
-Cohesion: 0.67
-Nodes (3): Msghdr, recvmsg(), sendmsg()
+### Community 328 - "wait4"
+Cohesion: 0.33
+Nodes (6): Getrusage(), _C_int, Rusage, pipe2(), sysctl(), wait4()
 
 ### Community 329 - "File Stat Calls"
 Cohesion: 0.40
@@ -2282,9 +2324,17 @@ Nodes (3): gettimeofday(), Errno, Timeval
 Cohesion: 0.50
 Nodes (4): fcntl(), FcntlFlock(), FcntlInt(), Flock_t
 
+### Community 346 - "wait4"
+Cohesion: 0.33
+Nodes (6): Getrusage(), _C_int, Rusage, pipe2(), sysctl(), wait4()
+
 ### Community 347 - "Filesystem Stat Calls"
 Cohesion: 0.50
 Nodes (4): Fstatfs(), getfsstat(), Statfs_t, Statfs()
+
+### Community 348 - "Fstatat"
+Cohesion: 0.40
+Nodes (5): Fstat(), Fstatat(), Stat_t, Lstat(), Stat()
 
 ### Community 349 - "Filesystem Stat Calls"
 Cohesion: 0.50
@@ -2322,6 +2372,10 @@ Nodes (4): BpfHdr, ifData, Rusage, Timeval
 Cohesion: 0.50
 Nodes (4): BpfHdr, ifData, Rusage, Timeval
 
+### Community 358 - "wait4"
+Cohesion: 0.40
+Nodes (5): Getrusage(), _C_int, Rusage, sysctl(), wait4()
+
 ### Community 359 - "Windows API Types"
 Cohesion: 0.50
 Nodes (3): JOBOBJECT_BASIC_LIMIT_INFORMATION, Servent, WSAData
@@ -2341,6 +2395,14 @@ Nodes (3): JOBOBJECT_BASIC_LIMIT_INFORMATION, Servent, WSAData
 ### Community 364 - "Keyctl DH Operations"
 Cohesion: 1.00
 Nodes (3): KeyctlDHParams, KeyctlDHCompute(), keyctlDH()
+
+### Community 366 - "Timespec"
+Cohesion: 0.40
+Nodes (5): ClockGettime(), Timespec, kevent(), Nanosleep(), utimensat()
+
+### Community 387 - "Timespec"
+Cohesion: 0.40
+Nodes (5): ClockGettime(), Timespec, kevent(), Nanosleep(), utimensat()
 
 ### Community 426 - "File System Stats"
 Cohesion: 0.67
@@ -2377,6 +2439,42 @@ Nodes (3): getgroups(), _Gid_t, setgroups()
 ### Community 434 - "Socket Message IO"
 Cohesion: 0.67
 Nodes (3): Msghdr, recvmsg(), sendmsg()
+
+### Community 435 - "Timespec"
+Cohesion: 0.40
+Nodes (5): ClockGettime(), Timespec, kevent(), Nanosleep(), utimensat()
+
+### Community 436 - "Fstatat"
+Cohesion: 0.40
+Nodes (5): Fstat(), Fstatat(), Stat_t, Lstat(), Stat()
+
+### Community 437 - "Fstatat"
+Cohesion: 0.40
+Nodes (5): Fstat(), Fstatat(), Stat_t, Lstat(), Stat()
+
+### Community 438 - "impl_utimensat"
+Cohesion: 0.50
+Nodes (5): enter_utimensat(), error_utimensat(), get_utimensatAddr(), Timespec, impl_utimensat()
+
+### Community 440 - "utimensat"
+Cohesion: 0.50
+Nodes (4): ClockGettime(), Timespec, kevent(), utimensat()
+
+### Community 441 - "Statfs"
+Cohesion: 0.50
+Nodes (4): Fstatfs(), getfsstat(), Statfs_t, Statfs()
+
+### Community 442 - "Statfs"
+Cohesion: 0.67
+Nodes (3): Fstatfs(), Statfs_t, Statfs()
+
+### Community 443 - "getgroups"
+Cohesion: 0.67
+Nodes (3): getgroups(), _Gid_t, setgroups()
+
+### Community 444 - "readdir_r"
+Cohesion: 0.67
+Nodes (3): Dirent, Errno, readdir_r()
 
 ### Community 445 - "Group ID Management"
 Cohesion: 0.67
@@ -2494,6 +2592,14 @@ Nodes (3): getgroups(), _Gid_t, setgroups()
 Cohesion: 0.67
 Nodes (3): Msghdr, recvmsg(), sendmsg()
 
+### Community 474 - "recvmsg"
+Cohesion: 0.67
+Nodes (3): Msghdr, recvmsg(), sendmsg()
+
+### Community 475 - "capRightsGet"
+Cohesion: 0.67
+Nodes (3): capRightsGet(), capRightsLimit(), CapRights
+
 ### Community 476 - "Group ID Management"
 Cohesion: 0.67
 Nodes (3): getgroups(), _Gid_t, setgroups()
@@ -2501,6 +2607,14 @@ Nodes (3): getgroups(), _Gid_t, setgroups()
 ### Community 477 - "Socket Message IO"
 Cohesion: 0.67
 Nodes (3): Msghdr, recvmsg(), sendmsg()
+
+### Community 478 - "Fstatat"
+Cohesion: 0.67
+Nodes (3): Fstat(), Fstatat(), Stat_t
+
+### Community 479 - "Statfs"
+Cohesion: 0.67
+Nodes (3): Fstatfs(), Statfs_t, Statfs()
 
 ### Community 480 - "Group ID Management"
 Cohesion: 0.67
@@ -2654,6 +2768,54 @@ Nodes (3): IfData, Rusage, Timeval
 Cohesion: 0.67
 Nodes (3): IfData, Rusage, Timeval
 
+### Community 529 - "getgroups"
+Cohesion: 0.67
+Nodes (3): getgroups(), _Gid_t, setgroups()
+
+### Community 569 - "recvmsg"
+Cohesion: 0.67
+Nodes (3): Msghdr, recvmsg(), sendmsg()
+
+### Community 570 - "capRightsGet"
+Cohesion: 0.67
+Nodes (3): capRightsGet(), capRightsLimit(), CapRights
+
+### Community 645 - "Fstatat"
+Cohesion: 0.67
+Nodes (3): Fstat(), Fstatat(), Stat_t
+
+### Community 646 - "Statfs"
+Cohesion: 0.67
+Nodes (3): Fstatfs(), Statfs_t, Statfs()
+
+### Community 660 - "getgroups"
+Cohesion: 0.67
+Nodes (3): getgroups(), _Gid_t, setgroups()
+
+### Community 661 - "recvmsg"
+Cohesion: 0.67
+Nodes (3): Msghdr, recvmsg(), sendmsg()
+
+### Community 662 - "Statvfs1"
+Cohesion: 0.67
+Nodes (3): Fstatvfs1(), Statvfs_t, Statvfs1()
+
+### Community 663 - "getgroups"
+Cohesion: 0.67
+Nodes (3): getgroups(), _Gid_t, setgroups()
+
+### Community 664 - "recvmsg"
+Cohesion: 0.67
+Nodes (3): Msghdr, recvmsg(), sendmsg()
+
+### Community 665 - "getgroups"
+Cohesion: 0.67
+Nodes (3): getgroups(), _Gid_t, setgroups()
+
+### Community 713 - "recvmsg"
+Cohesion: 0.67
+Nodes (3): Msghdr, recvmsg(), sendmsg()
+
 ### Community 1094 - "Mount Attributes"
 Cohesion: 1.00
 Nodes (3): MountAttr, MountSetattr(), mountSetattr()
@@ -2661,16 +2823,16 @@ Nodes (3): MountAttr, MountSetattr(), mountSetattr()
 ## Knowledge Gaps
 - **1914 isolated node(s):** `cpt`, `wchar`, `go.test.sh script`, `go.test.sh script`, `SliceValue` (+1909 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **528 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **540 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Pointer` connect `Pointer` to `zsyscall_freebsd_386.go`, `zsyscall_windows.go`, `zsyscall_darwin_arm64.go`, `BytePtrFromString`, `zsyscall_zos_s390x.go`, `syscall_zos_s390x.go`, `zsyscall_freebsd_arm64.go`, `zsyscall_freebsd_riscv64.go`, `zsyscall_openbsd_386.go`, `zsyscall_openbsd_arm64.go`, `zsyscall_openbsd_riscv64.go`, `zsyscall_netbsd_386.go`, `zsyscall_netbsd_amd64.go`, `zsyscall_netbsd_arm64.go`, `types_windows.go`, `security_windows.go`, `zsyscall_linux.go`, `GetZosLibVec`, `ztypes_linux.go`, `syscall_windows.go`, `DevInfo`, `zsyscall_aix_ppc64_gc.go`, `zsyscall_aix_ppc64_gccgo.go`, `zsyscall_freebsd_amd64.go`, `zsyscall_freebsd_arm.go`, `syscall_linux.go`, `zsyscall_openbsd_amd64.go`, `zsyscall_openbsd_arm.go`, `zsyscall_openbsd_mips64.go`, `zsyscall_openbsd_ppc64.go`, `zsyscall_dragonfly_amd64.go`, `zsyscall_aix_ppc64.go`, `ioctl_linux.go`, `zsyscall_aix_ppc.go`, `syscall_darwin.go`, `_Socklen`, `syscall_unix.go`, `Errno`, `zsyscall_linux_mips64.go`, `zsyscall_linux_loong64.go`, `zsyscall_linux_mips64le.go`, `zsyscall_linux_riscv64.go`, `syscall_freebsd.go`, `Mount Attributes`, `syscall_bsd.go`, `dll_windows.go`, `Stat_LE_t`, `syscall_aix.go`, `zsyscall_linux_amd64.go`, `syscall_openbsd.go`, `zsyscall_linux_ppc64.go`, `zsyscall_linux_ppc64le.go`, `colorable_windows.go`, `syscall_dragonfly.go`, `syscall_netbsd.go`, `s390x Socket Syscalls`, `mips Process Syscalls`, `mipsle Process Syscalls`, `ppc Process Syscalls`, `Windows NT Syscalls`, `sparc64 Process Syscalls`, `bpxsvc_zos.go`, `Socket Control Messages`, `NsecToTimespec`, `arm64 Process Syscalls`, `zsyscall_netbsd_arm.go`, `emptyIovecs`, `arm Process Syscalls`, `UTF16PtrFromString`, `386 Process Syscalls`, `mips64x Stat Syscalls`, `s390x Process Syscalls`, `WaitStatus`, `File Locking`, `Resource Limits`, `Socket Functions`, `Poll Syscall`, `File Stat`, `Time Syscall`, `Process Times`, `FS Stat`, `File Time`, `System Info`, `DecomposeCommandLine`, `syscall_linux_loong64.go`, `Resource Limits`, `Poll Syscall`, `syscall_linux_386.go`, `syscall_linux_arm.go`, `File Stat`, `CPU Affinity`, `Time Syscall`, `syscall_linux_riscv64.go`, `Extended Attributes`, `IO Control`, `Process Times`, `System Info`, `FS Stat`, `File Time`, `Resource Limits`, `Poll Syscall`, `Filetime`, `Epoll Wait`, `32-bit Resource Limit`, `Time Syscall`, `FS Stat`, `File Time`, `Epoll Wait`, `Resource Limits`, `FS Stat`, `File Time`, `Epoll Wait`, `Resource Limits`, `mipsx Stat Syscalls`, `Get Time of Day`, `Epoll Wait`, `32-bit Resource Limit`, `FS Stat`, `Epoll Wait`, `syscall_linux_ppc.go`, `32-bit Resource Limit`, `Time Syscall`, `FS Stat`, `File Time`, `Epoll Wait`, `32-bit Resource Limit`, `Time Syscall`, `Poll/Select Syscalls`, `FS Stat`, `File Time`, `Epoll Wait`, `Ifreq`, `Resource Limits`, `Time Syscall`, `FS Stat`, `Ioctl z/OS`, `FreeBSD 386 Syscalls`, `FreeBSD amd64 Syscalls`, `Time Syscalls (BSD)`, `Time Syscalls (BSD2)`, `File Time`, `Ioctl Signed`, `Ioctl Unsigned`, `Time structures`, `Dragonfly amd64 Syscalls`, `FreeBSD arm Syscalls`, `FreeBSD arm64 Syscalls`, `syscall_freebsd_riscv64.go`, `_Socklen`, `Ustat structures`, `File time update`, `File time update`, `Resource limits`, `Ustat structures`, `File time update`, `Epoll events`, `zptrace_armnn_linux.go`, `pselect6`, `_Socklen`, `Resource limits`, `Resource limits`, `PSAPI_WORKING_SET_EX_BLOCK`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `Epoll events`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `fileHandle`, `bytes2iovec`, `Timespec`, `Timespec`, `Timeval`, `Timespec`, `Getitimer`, `syscall_solaris.go`, `Timeval`, `_C_int`, `ByteSliceFromString`, `Timeval`, `_C_int`, `Fstatat`, `Statfs`, `Timeval`, `_C_int`, `zptrace_x86_linux.go`, `zptrace_mipsnn_linux.go`, `zptrace_mipsnnle_linux.go`, `.sockaddr`, `_Socklen`, `Getrlimit`, `fcntl_darwin.go`, `mremapMmapper`, `isatty_windows.go`, `openat2`, `wait4`, `wait4`, `wait4`, `.tipcAddr`, `futimesat`, `futimesat`, `futimesat`, `futimesat`, `futimesat`, `futimesat`, `Time & Select Calls`, `Time & Select Calls`, `Time & Select Calls`, `Timer & Timestamping`, `Scheduler Attributes`, `File Control Calls`, `Raw Socket Syscalls`, `File Stat Calls`, `File Stat Calls`, `Clock and Sleep Calls`, `File Stat Calls`, `seek`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `getgroups`, `File Stat Calls`, `recvmsg`, `File Stat Calls`, `Linux Capabilities`, `Windows Service Control`, `Memory Mapping`, `File Control Calls`, `GetsockoptIPv6MTUInfo`, `Filesystem Stat Calls`, `Getrlimit`, `Filesystem Stat Calls`, `Keyctl DH Operations`, `TIPC Socket Address`, `Auxiliary Vector Access`, `Ustat structures`, `Hurd Ioctl Calls`, `Socket Syscalls (impl)`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `Epoll Wait`, `Resource Limits`, `Group ID Management`, `File Stat Operations`, `File System Stats`, `File Time Operations`, `Group ID Management`, `Socket Message IO`, `File Stat Operations`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Resource limits`, `Socket Message IO`, `Time structures`, `File System Stats`, `Group ID Management`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Epoll events`, `Socket Message IO`, `Timeval`, `Resource limits`, `File time update`?**
-  _High betweenness centrality (0.574) - this node is a cross-community bridge._
+- **Why does `Pointer` connect `Pointer` to `zsyscall_freebsd_386.go`, `zsyscall_windows.go`, `zsyscall_solaris_amd64.go`, `zsyscall_darwin_arm64.go`, `BytePtrFromString`, `zsyscall_zos_s390x.go`, `syscall_zos_s390x.go`, `zsyscall_freebsd_arm64.go`, `zsyscall_freebsd_riscv64.go`, `zsyscall_openbsd_386.go`, `zsyscall_openbsd_arm64.go`, `zsyscall_openbsd_riscv64.go`, `zsyscall_netbsd_386.go`, `zsyscall_netbsd_arm64.go`, `types_windows.go`, `security_windows.go`, `zsyscall_linux.go`, `GetZosLibVec`, `ztypes_linux.go`, `syscall_windows.go`, `DevInfo`, `zsyscall_aix_ppc64_gc.go`, `zsyscall_aix_ppc64_gccgo.go`, `zsyscall_freebsd_amd64.go`, `zsyscall_freebsd_arm.go`, `syscall_linux.go`, `zsyscall_openbsd_amd64.go`, `zsyscall_openbsd_arm.go`, `zsyscall_openbsd_mips64.go`, `zsyscall_openbsd_ppc64.go`, `zsyscall_dragonfly_amd64.go`, `zsyscall_aix_ppc64.go`, `ioctl_linux.go`, `zsyscall_aix_ppc.go`, `syscall_darwin.go`, `_Socklen`, `syscall_unix.go`, `Errno`, `zsyscall_linux_mips64.go`, `zsyscall_linux_loong64.go`, `zsyscall_linux_mips64le.go`, `DecomposeCommandLine`, `zsyscall_linux_riscv64.go`, `syscall_freebsd.go`, `syscall_bsd.go`, `dll_windows.go`, `Stat_LE_t`, `syscall_aix.go`, `zsyscall_linux_amd64.go`, `syscall_openbsd.go`, `zsyscall_linux_ppc64.go`, `zsyscall_linux_ppc64le.go`, `colorable_windows.go`, `syscall_dragonfly.go`, `syscall_netbsd.go`, `s390x Socket Syscalls`, `mips Process Syscalls`, `mipsle Process Syscalls`, `ppc Process Syscalls`, `sparc64 Process Syscalls`, `bpxsvc_zos.go`, `Socket Control Messages`, `NsecToTimespec`, `arm64 Process Syscalls`, `appendBytes`, `HWND`, `arm Process Syscalls`, `UTF16PtrFromString`, `386 Process Syscalls`, `EventPort`, `mips64x Stat Syscalls`, `s390x Process Syscalls`, `WaitStatus`, `Socket Functions`, `ZosFdToPath`, `Windows NT Syscalls`, `BytePtrFromString`, `syscall_linux_386.go`, `syscall_linux_arm.go`, `_Socklen`, `CPUSet`, `Extended Attributes`, `_Socklen`, `mipsx Stat Syscalls`, `Windows Service Control`, `_Socklen`, `syscall_linux_ppc.go`, `_Socklen`, `Poll/Select Syscalls`, `Socket Syscalls (impl)`, `_Socklen`, `Ioctl z/OS`, `FreeBSD 386 Syscalls`, `FreeBSD amd64 Syscalls`, `Time Syscalls (BSD)`, `Time Syscalls (BSD2)`, `_Socklen`, `Ioctl Unsigned`, `Dragonfly amd64 Syscalls`, `FreeBSD arm Syscalls`, `FreeBSD arm64 Syscalls`, `syscall_freebsd_riscv64.go`, `_Socklen`, `PSAPI_WORKING_SET_EX_BLOCK`, `zptrace_armnn_linux.go`, `pselect6`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `_Socklen`, `fileHandle`, `bytes2iovec`, `Timespec`, `Connectx`, `Timespec`, `Getitimer`, `emptyIovecs`, `Timeval`, `connectx`, `ByteSliceFromString`, `Timeval`, `_C_int`, `Timespec`, `Timeval`, `Timeval`, `_C_int`, `zptrace_x86_linux.go`, `zptrace_mipsnn_linux.go`, `zptrace_mipsnnle_linux.go`, `.sockaddr`, `_Socklen`, `Getrlimit`, `fcntl_darwin.go`, `mremapMmapper`, `.string`, `Timeval`, `wait4`, `wait4`, `wait4`, `Timeval`, `Timeval`, `futimesat`, `futimesat`, `futimesat`, `futimesat`, `futimesat`, `futimesat`, `Time & Select Calls`, `Time & Select Calls`, `Time & Select Calls`, `Timer & Timestamping`, `Scheduler Attributes`, `File Control Calls`, `Timeval`, `File Stat Calls`, `File Stat Calls`, `Clock and Sleep Calls`, `File Stat Calls`, `_C_int`, `openat`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `File Stat Calls`, `wait4`, `File Stat Calls`, `wait4`, `File Stat Calls`, `Linux Capabilities`, `Memory Mapping`, `File Control Calls`, `wait4`, `Filesystem Stat Calls`, `Fstatat`, `Filesystem Stat Calls`, `wait4`, `Keyctl DH Operations`, `Timespec`, `Auxiliary Vector Access`, `Hurd Ioctl Calls`, `Timespec`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `Timespec`, `Fstatat`, `Fstatat`, `impl_utimensat`, `utimensat`, `Statfs`, `Statfs`, `getgroups`, `readdir_r`, `Group ID Management`, `File Stat Operations`, `File System Stats`, `File Time Operations`, `Group ID Management`, `Socket Message IO`, `File Stat Operations`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `Group ID Management`, `Socket Message IO`, `File System Stats`, `Group ID Management`, `File System Stats`, `Group ID Management`, `Socket Message IO`, `recvmsg`, `capRightsGet`, `Group ID Management`, `Socket Message IO`, `Fstatat`, `Statfs`, `Group ID Management`, `Socket Message IO`, `getgroups`, `recvmsg`, `capRightsGet`, `File Locking`, `Resource Limits`, `Poll Syscall`, `File Stat`, `Time Syscall`, `Process Times`, `FS Stat`, `File Time`, `System Info`, `Fstatat`, `Statfs`, `Resource Limits`, `Poll Syscall`, `File Stat`, `Time Syscall`, `Process Times`, `FS Stat`, `File Time`, `System Info`, `IO Control`, `Resource Limits`, `Poll Syscall`, `getgroups`, `recvmsg`, `Statvfs1`, `getgroups`, `recvmsg`, `getgroups`, `Epoll Wait`, `32-bit Resource Limit`, `Time Syscall`, `FS Stat`, `File Time`, `Epoll Wait`, `Resource Limits`, `FS Stat`, `File Time`, `Epoll Wait`, `Resource Limits`, `Get Time of Day`, `Epoll Wait`, `32-bit Resource Limit`, `FS Stat`, `Epoll Wait`, `32-bit Resource Limit`, `Time Syscall`, `FS Stat`, `File Time`, `Epoll Wait`, `32-bit Resource Limit`, `Time Syscall`, `FS Stat`, `File Time`, `Epoll Wait`, `Resource Limits`, `Time Syscall`, `FS Stat`, `File Time`, `Epoll Wait`, `Resource Limits`, `Time structures`, `Ustat structures`, `File time update`, `Epoll events`, `Resource limits`, `Time structures`, `Ustat structures`, `File time update`, `Epoll events`, `Resource limits`, `Ustat structures`, `File time update`, `Epoll events`, `Resource limits`, `File time update`, `recvmsg`, `Getrlimit`, `Resource limits`, `Setattrlist`, `poll`, `Resource limits`, `Mount Attributes`, `shmctl`, `Getrlimit`, `poll`, `Getrlimit`, `poll`, `Getrlimit`, `poll`, `Getrlimit`?**
+  _High betweenness centrality (0.578) - this node is a cross-community bridge._
 - **Why does `PPSKTime` connect `PPSK Time` to `ztypes_linux.go`?**
   _High betweenness centrality (0.123) - this node is a cross-community bridge._
-- **Why does `ZosConsolePrintf()` connect `syscall_zos_s390x.go` to `GetZosLibVec`, `Pointer`, `.Sprintf`?**
+- **Why does `ZosConsolePrintf()` connect `syscall_zos_s390x.go` to `GetZosLibVec`, `.Sprintf`, `Pointer`?**
   _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **Are the 203 inferred relationships involving `Pointer` (e.g. with `.Write()` and `doTitleSequence()`) actually correct?**
   _`Pointer` has 203 INFERRED edges - model-reasoned connections that need verification._
