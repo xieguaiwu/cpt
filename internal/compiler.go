@@ -65,7 +65,9 @@ func compileGXX(source string) (string, error) {
 
 func compileGCC(source string) (string, error) {
 	out := binaryPath(source)
-	cmd := exec.Command("gcc", "-std=c11", "-O2", "-o", out, source)
+	// Flags aligned with ~/.config/nvim/lua/utils.lua (CompileRun):
+	// gcc -std=c11 -O2 -Wall
+	cmd := exec.Command("gcc", "-std=c11", "-O2", "-Wall", "-o", out, source)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 	if err := cmd.Run(); err != nil {
